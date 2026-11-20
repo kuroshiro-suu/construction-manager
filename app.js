@@ -20,7 +20,26 @@ const initial={jobs:[
 let db; try{db=JSON.parse(localStorage.getItem(KEY))}catch(e){} if(!db || !Array.isArray(db.jobs)||!Array.isArray(db.payments)) db=structuredClone(initial);
 function persist(){localStorage.setItem(KEY,JSON.stringify(db))}
 const el=id=>document.getElementById(id),yen=n=>n==null?'—':'¥'+Number(n).toLocaleString('ja-JP'),html=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const date=s=>s?s.replaceAll('-','/').slice(5):'未定';
+const demoTaxRate = 10;
+const standardTaxRate = () => db.standardTaxRate ?? demoTaxRate;
+
+function contractAmount(job) {
+  if (job.contract == null || job.contract === '') return '—';
+  const net = Number(job.contract);
+  if (!Number.isFinite(net)) return '—';
+  const gross = net + Math.floor(net * (job.taxRate ?? demoTaxRate) / 100);
+  return `${net.toLocaleString('ja-JP')}（${gross.toLocaleString('ja-JP')}）`;
+}
+
+function jobPeriod(job) {
+  if (!job.start && !job.end) return '—';
+  const format = value => value ? html(value.replaceAll('-', '/')) : '—';
+  return `${format(job.start)}〜${format(job.end)}`;
+}
+
+function jobHref(id) {
+  return 'construction.html?id=' + encodeURIComponent(id);
+}
 function payrows(j){return db.payments.filter(p=>p.job===j.id)}
 function hasPending(j){return payrows(j).some(p=>p.amount===null||p.amount===''||p.amount===undefined)}
 function isComplete(j){return !!j.posted && !hasPending(j)&&payrows(j).every(p=>p.paid===true)&&j.income.length>0&&j.income.every(x=>x.received===true)}
@@ -33,22 +52,110 @@ function closeModal(){el('modalwrap').classList.remove('open');confirmFn=null;el
 function modal(title,content,confirmLabel,callback){el('modal-title').textContent=title;el('modal-content').innerHTML=content;const b=el('modal-confirm');b.classList.toggle('hidden',!callback);b.textContent=confirmLabel||'登録';confirmFn=callback||null;el('modalwrap').classList.add('open')}
 el('modal-close').addEventListener('click',closeModal);el('modalwrap').addEventListener('click',e=>{if(e.target===el('modalwrap'))closeModal()});el('modal-confirm').addEventListener('click',()=>confirmFn?.());
 function newId(){const year=new Date().getFullYear().toString();let max=0;for(const j of db.jobs){if(j.id.startsWith(year)&&j.id.endsWith('-01'))max=Math.max(max,Number(j.id.slice(4,8))||0)}return year+String(max+1).padStart(4,'0')+'-01'}
-function openNewJob(){modal('工事の仮登録','<div class="stack"><div class="field"><label>工事名だけで登録できます</label><input id="newjob-name" placeholder="例：田中邸 給湯器交換"></div><p class="inlinehelp">工事No.は試作品内で仮採番します。本番ではサーバー上で自動採番します。</p></div>','工事登録',()=>{const name=el('newjob-name').value.trim();if(!name){toast('工事名を入力してください');return}const id=newId();db.jobs.unshift({id,name,category:'元請',client:'',honorific:'様',address:'',phone:'',start:'',end:'',ordered:'',completed:'',posted:'',lost:false,contract:null,budget:null,income:[],history:[]});persist();location.href='construction.html?id='+encodeURIComponent(id)})}
-function topPage(){
-let tab='jobs';
-function display(){const q=el('jobs-search').value.trim().toLowerCase();el('status-filters').innerHTML=statuses.map(s=>`<button type="button" class="lamp ${on.includes(s)?'on':''}" data-status="${s}" aria-pressed="${on.includes(s)}">${s}</button>`).join('');
-const list=db.jobs.filter(j=>on.includes(status(j))&&(j.name+j.client+j.id).toLowerCase().includes(q));el('jobs-tbody').innerHTML=list.map(j=>`<tr><td class="linkish" data-id="${html(j.id)}">${html(j.name)}</td><td>${html(j.client||'—')}</td><td class="num">${j.start?date(j.start):'—'} 〜 ${j.end?date(j.end):'—'}</td><td class="right num">${yen(j.contract)}</td><td>${pill(status(j))}</td></tr>`).join('')||'<tr><td colspan="5" class="no-data">該当する工事はありません</td></tr>';
-el('job-cards').innerHTML=list.map(j=>`<div class="jobcard" data-id="${html(j.id)}"><div class="cardrow"><div class="cardname">${html(j.name)}</div>${pill(status(j))}</div><div class="cardbottom"><span class="cardmeta">${html(j.client||'—')}　${j.start?date(j.start):'—'}〜${j.end?date(j.end):'—'}</span><span class="cardmoney num">${yen(j.contract)}</span></div></div>`).join('')||'<div class="no-data">該当する工事はありません</div>';
-el('job-count').textContent=`${list.length}件表示 / 登録${db.jobs.length}件`}
+function openNewJob(){modal('工事の仮登録','<div class="stack"><div class="field"><label for="newjob-name">工事名</label><input id="newjob-name" placeholder="例：田中邸 給湯器交換"></div><p class="inlinehelp">工事No.は試作品内で仮採番します。本番ではサーバー上で自動採番します。</p></div>','工事登録',()=>{const name=el('newjob-name').value.trim();if(!name){toast('工事名を入力してください');return}const id=newId();db.jobs.unshift({id,name,category:'元請',client:'',honorific:'様',address:'',phone:'',start:'',end:'',ordered:'',completed:'',posted:'',lost:false,contract:null,budget:null,taxRate:standardTaxRate(),income:[],history:[]});persist();location.href=jobHref(id)});const input=el('newjob-name');input.focus();input.addEventListener('keydown',event=>{if(event.key==='Enter')confirmFn?.()})}
+function openSettings() {
+  modal('設定', `
+    <form id="tax-settings">
+      <div class="field">
+        <label for="standard-tax">標準消費税率（%）</label>
+        <input id="standard-tax" type="number" min="0" step="any" required value="${html(standardTaxRate())}">
+      </div>
+      <p class="inlinehelp">新しく仮登録する工事に適用します。</p>
+    </form>
+    <p class="muted">事業者情報設定・決算月・業者マスター・単位マスター・ユーザー管理は準備中です。</p>`,
+    '保存', () => el('tax-settings').requestSubmit());
+  el('tax-settings').addEventListener('submit', event => {
+    event.preventDefault();
+    db.standardTaxRate = el('standard-tax').valueAsNumber;
+    persist();
+    closeModal();
+    toast('標準消費税率を保存しました');
+  });
+}
+
+function topPage() {
+  const filters = el('status-filters');
+  filters.innerHTML = statuses.map(name => {
+    const pressed = on.includes(name);
+    return `<button type="button" class="lamp${pressed ? ' on' : ''}" data-status="${name}" aria-pressed="${pressed}">${name}</button>`;
+  }).join('');
+
+  function display() {
+    const query = el('jobs-search').value.trim().toLowerCase();
+    const jobs = db.jobs.map(job => ({job, state: status(job)})).filter(({job, state}) =>
+      on.includes(state) && [job.name, job.client, job.id].join(' ').toLowerCase().includes(query));
+    el('jobs-tbody').innerHTML = jobs.map(({job, state}) => `
+      <tr>
+        <td><a class="linkish" href="${jobHref(job.id)}">${html(job.name)}</a></td>
+        <td>${html(job.client || '—')}</td>
+        <td class="num">${jobPeriod(job)}</td>
+        <td class="right num">${contractAmount(job)}</td>
+        <td>${pill(state)}</td>
+      </tr>`).join('') || '<tr><td colspan="5" class="no-data">該当する工事はありません</td></tr>';
+    el('job-cards').innerHTML = jobs.map(({job, state}) => `
+      <a class="jobcard job-link" href="${jobHref(job.id)}">
+        <div class="cardrow"><span class="cardname">${html(job.name)}</span>${pill(state)}</div>
+        <div class="cardbottom">
+          <span class="job-meta"><span class="cardmeta">${html(job.client || '—')}</span><span class="num">${jobPeriod(job)}</span></span>
+          <span class="cardmoney num">${contractAmount(job)}</span>
+        </div>
+      </a>`).join('') || '<div class="no-data">該当する工事はありません</div>';
+    el('job-count').textContent = `${jobs.length}件表示 / 登録${db.jobs.length}件`;
+  }
+
 function payDisplay(){const q=el('pay-search').value.trim().toLowerCase(),mode=el('pay-sort').value;let list=db.payments.filter(p=>{const j=db.jobs.find(j=>j.id===p.job);return (p.vendor+(j?.name||'')).toLowerCase().includes(q)}).slice();list.sort((a,b)=>mode==='vendor'?a.vendor.localeCompare(b.vendor,'ja'):mode==='budget'?(b.budget||0)-(a.budget||0):mode==='blank'?Number(a.amount!==null)-Number(b.amount!==null):a.due.localeCompare(b.due));
 el('pay-tbody').innerHTML=list.map(p=>{const j=db.jobs.find(j=>j.id===p.job);return `<tr><td>${html(p.vendor)}</td><td class="linkish" data-id="${html(p.job)}">${html(j?.name||p.job)}</td><td class="num">${html(p.due||'—')}</td><td class="right num">${yen(p.budget)}</td><td class="right num">${p.amount===null?'<span class="muted">空欄</span>':yen(p.amount)}</td><td>${p.paid?'支払済':'未払'}</td></tr>`}).join('')||'<tr><td colspan="6" class="no-data">支払情報がありません</td></tr>';
 el('pay-cards').innerHTML=list.map(p=>{const j=db.jobs.find(j=>j.id===p.job);return `<div class="jobcard" data-id="${html(p.job)}"><div class="cardrow"><b>${html(p.vendor)}</b><b>${p.amount===null?'支払額：空欄':yen(p.amount)}</b></div><div class="cardbottom"><span class="cardmeta">${html(j?.name||p.job)}　${html(p.due||'')}</span><span class="muted">${p.paid?'支払済':'未払'}</span></div></div>`}).join('');el('pay-count').textContent=`${list.length}件の支払明細。未確定金額も表示。`}
-function switchTab(next){tab=next;document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));el('jobs-panel').classList.toggle('hidden',tab!=='jobs');el('payments-panel').classList.toggle('hidden',tab!=='payments');display();payDisplay()}
-document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
-el('status-filters').addEventListener('click',e=>{const b=e.target.closest('[data-status]');if(!b)return;const s=b.dataset.status;on=on.includes(s)?on.filter(x=>x!==s):[...on,s];display()});
-el('jobs-search').addEventListener('input',display);el('pay-search').addEventListener('input',payDisplay);el('pay-sort').addEventListener('change',payDisplay);
-document.body.addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)location.href='construction.html?id='+encodeURIComponent(b.dataset.id)});
-document.querySelectorAll('[data-modal]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.modal==='newjob')openNewJob();else if(b.dataset.modal==='master')modal('マスタ登録（今後設計）','<p>取引先・施主・業者・振込先・締め日などのマスター登録画面は未実装です。</p>');else modal('ユーザー設定（今後設計）','<p>オーナーと3種類のゲスト権限は仕様書に記載しています。認証・アクセス制御は未実装です。</p>')}));display();payDisplay()}
+
+  document.querySelectorAll('[data-tab]').forEach(button => {
+    button.addEventListener('click', () => {
+      const tab = button.dataset.tab;
+      document.querySelectorAll('[data-tab]').forEach(item => {
+        const active = item === button;
+        item.classList.toggle('active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+      el('jobs-panel').classList.toggle('hidden', tab !== 'jobs');
+      el('finance-panel').classList.toggle('hidden', tab !== 'finance');
+    });
+  });
+
+  const financeButtons = document.querySelectorAll('[data-finance]');
+  function showFinance(name) {
+    const payments = name === '支払一覧';
+    financeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.finance === name)));
+    el('finance-preview').classList.toggle('hidden', payments);
+    el('payments-panel').classList.toggle('hidden', !payments);
+    el('finance-heading').textContent = name;
+    if (payments) payDisplay();
+  }
+  financeButtons.forEach(button => button.addEventListener('click', () => showFinance(button.dataset.finance)));
+
+  filters.addEventListener('click', event => {
+    const button = event.target.closest('button');
+    if (!button) return;
+    const state = button.dataset.status;
+    const pressed = !on.includes(state);
+    on = pressed ? [...on, state] : on.filter(item => item !== state);
+    button.classList.toggle('on', pressed);
+    button.setAttribute('aria-pressed', String(pressed));
+    display();
+  });
+  el('jobs-search').addEventListener('input', display);
+  el('pay-search').addEventListener('input', payDisplay);
+  el('pay-sort').addEventListener('change', payDisplay);
+  el('payments-panel').addEventListener('click', event => {
+    const target = event.target.closest('[data-id]');
+    if (target) location.href = jobHref(target.dataset.id);
+  });
+  document.querySelector('[data-modal="newjob"]').addEventListener('click', openNewJob);
+  document.querySelector('[data-modal="settings"]').addEventListener('click', openSettings);
+  document.querySelector('[data-modal="reports"]').addEventListener('click', () => {
+    modal('全社帳票出力', '<p>全社帳票の出力は準備中です。</p>');
+  });
+  display();
+  showFinance('収支台帳');
+}
 function detailPage(){const params=new URLSearchParams(location.search),id=params.get('id')||db.jobs[0].id;let job=db.jobs.find(j=>j.id===id);if(!job){location.href='index.html';return}
 let previousPosted=job.posted;
 function fill(){el('job-number').textContent='工事No. '+job.id;el('job-name').value=job.name;document.querySelectorAll('[name=category]').forEach(r=>r.checked=r.value===job.category);el('client-name').value=job.client||'';el('honorific').value=job.honorific||'様';el('client-address').value=job.address||'';el('client-phone').value=job.phone||'';el('period-start').value=job.start||'';el('period-end').value=job.end||'';el('order-date').value=job.ordered||'';el('completion-date').value=job.completed||'';el('posting-date').value=job.posted||'';render()}
