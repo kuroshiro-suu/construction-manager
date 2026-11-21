@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>工事情報画面｜PC・スマホ比較</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 28px; background: #e9eef3; color: #253443; font: 16px/1.6 'Yu Gothic',Meiryo,sans-serif; }
+    h1 { margin: 0; font-size: 24px; } p { margin: 8px 0 24px; }
+    .comparison { display: flex; align-items: flex-start; gap: 28px; flex-wrap: wrap; }
+    h2 { margin: 0 0 10px; font-size: 16px; }
+    .desktop { width: min(768px, 100%); aspect-ratio: 1280 / 900; height: auto; overflow: hidden; border: 1px solid #9aaebf; border-radius: 8px; background: white; }
+    .desktop iframe { width: 1280px; height: 900px; transform: scale(.6); transform-origin: top left; }
+    .phone { width: min(390px, 100%); height: 844px; border: 1px solid #9aaebf; border-radius: 16px; overflow: hidden; background: white; }
+    .phone iframe { width: 100%; height: 844px; }
+    iframe { display: block; border: 0; }
+    a { color: #205b86; }
+    .hint { font-size: 14px; color: #526778; }
+    @media(max-width: 820px) { body { padding: 16px; } .comparison { display: block; } section { margin-bottom: 24px; overflow-x: auto; } }
+  </style>
+</head>
+<body>
+  <h1>工事情報画面</h1>
+  <p>工事を選んだ先の「工事情報画面」です。PCは左右に整理、スマホは縦に並べています。</p>
+  <div class="comparison">
+    <section aria-label="PC表示の見本">
+      <h2>PC・横画面 <span class="hint">1280 × 900／縮小表示</span></h2>
+      <div class="desktop"><iframe src="construction.html?id=20270001-01" title="工事情報画面のPC表示"></iframe></div>
+    </section>
+    <section aria-label="スマートフォン表示の見本">
+      <h2>スマホ・縦画面 <span class="hint">390 × 844</span></h2>
+      <div class="phone"><iframe src="construction.html?id=20270001-01" title="工事情報画面のスマホ表示"></iframe></div>
+    </section>
+  </div>
+  <p class="hint">呼称：工事情報画面。金額はサンプルです。見積・帳票の機能と本番の認証・権限制御はこれから作成します。</p>
+  <a href="construction.html?id=20270001-01">実際の幅で工事情報画面を開く</a>　／　<a href="login.html">ログイン画面を見る</a>
+<script>const desktop = document.querySelector(".desktop"); new ResizeObserver(() => { desktop.querySelector("iframe").style.transform = "scale(" + desktop.clientWidth / 1280 + ")"; }).observe(desktop);</script></body>
+</html>

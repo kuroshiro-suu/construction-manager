@@ -1,0 +1,51 @@
+body[data-page="construction"] { font-size: 16px; }
+body[data-page="construction"] .shell { max-width: 1160px; padding: 28px 32px; }
+body[data-page="construction"] .header { margin-bottom: 24px; gap: 16px; }
+body[data-page="construction"] .brand { font-size: 19px; }
+.back-to-list { color: #2e5f87; font-size: 14px; text-underline-offset: 4px; white-space: nowrap; }
+body[data-page="construction"] .panel { padding: 26px 28px; box-shadow: none; border-radius: 9px; }
+.detailtop h1 { margin: 4px 0 0; font-size: 24px; }
+body[data-page="construction"] .badge { font-size: 13px; padding: 6px 11px; }
+.detail-columns { display: grid; grid-template-columns: 1fr 1.1fr; gap: 36px; }
+.detail-section { border-top: 1px solid #d0dae3; padding-top: 18px; margin-top: 18px; }
+.detail-section h2 { font-size: 16px; margin: 0 0 16px; }
+.detail-section .field { margin-bottom: 12px; }
+body[data-page="construction"] .field label,.category-field legend { font-size: 14px; color: #526575; font-weight: 600; }
+body[data-page="construction"] input,body[data-page="construction"] select { min-height: 44px; font-size: 16px; }
+.category-field { border: 0; padding: 0; margin: 0 0 10px; }
+.category-field legend { padding: 0; }
+body[data-page="construction"] .radioline { gap: 12px; padding: 6px 0; }
+body[data-page="construction"] .radioline label { display: flex; align-items: center; gap: 7px; min-height: 36px; font-size: 14px; }
+body[data-page="construction"] .radioline input { min-height: 0; width: 17px; height: 17px; accent-color: #2e5f87; }
+.progress-dates { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
+body[data-page="construction"] .period { grid-template-columns: minmax(0,1fr) 16px minmax(0,1fr); gap: 7px; }
+body[data-page="construction"] .metrics { display: block; }
+body[data-page="construction"] .metric { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 7px 0; border: 0; border-bottom: 1px solid #e1e7ec; border-radius: 0; background: none; }
+body[data-page="construction"] .metric small { font-size: 14px; }
+body[data-page="construction"] .metric b { font-size: 18px; font-variant-numeric: tabular-nums; text-align: right; }
+.amount-note { float: right; color: #647586; font-size: 12px; font-weight: 400; }
+body[data-page="construction"] .sectionhint { font-size: 12px; margin: 8px 0 0; }
+.detail-actions { margin-top: 24px; padding-top: 22px; border-top: 1px solid #d0dae3; }
+body[data-page="construction"] .mainbuttons button { min-height: 50px; background: #f6f9fb; border-radius: 5px; font-size: 16px; padding: 12px 8px; }
+body[data-page="construction"] .history { width: 100%; text-align: left; font: inherit; color: inherit; background: #fff; border-radius: 5px; }
+.history b { font-size: 13px; }
+.history-summary { display: block; margin-top: 3px; font-size: 12px; }
+.history-detail { font-size: 13px; color: #2e5f87; }
+body[data-page="construction"] .btn { min-height: 44px; font-size: 14px; }
+#save-job { min-width: 120px; }
+.prototype-note { font-size: 12px; color: #647586; margin: 14px 0; }
+@media(max-width:750px) {
+ body[data-page="construction"] .shell { padding: 20px 14px; }
+ body[data-page="construction"] .brand { font-size: 16px; }
+ body[data-page="construction"] .header { margin-bottom: 18px; }
+ body[data-page="construction"] .panel { padding: 20px 16px; }
+ .detail-columns { grid-template-columns: 1fr; gap: 0; }
+ .detailtop h1 { font-size: 22px; }
+ .progress-dates { grid-template-columns: 1fr; gap: 0; }
+ .progress-dates .field { display: grid; grid-template-columns: 64px minmax(0,1fr); align-items: center; gap: 12px; }
+ body[data-page="construction"] .mainbuttons { gap: 6px; }
+ body[data-page="construction"] .mainbuttons button { font-size: 13px; padding: 10px 3px; }
+ body[data-page="construction"] .metric b { font-size: 18px; }
+ .detail-actions { margin-top: 22px; }
+}
+@media(max-width:360px) { body[data-page="construction"] .brand { font-size: 14px; } .back-to-list { font-size: 12px; } body[data-page="construction"] .panel { padding-inline: 12px; } }

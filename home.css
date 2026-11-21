@@ -1,0 +1,59 @@
+/* ホーム画面の外観。工事情報・ログイン画面のスタイルには影響させない。 */
+body[data-page="index"] .shell { max-width: 1240px; padding: 28px 32px; }
+body[data-page="index"] .header { margin-bottom: 26px; gap: 12px; }
+body[data-page="index"] .brand { display: flex; align-items: center; gap: 12px; font-size: 19px; letter-spacing: 0; }
+.home-brand-mark { display: grid; place-items: center; flex-shrink: 0; width: 36px; height: 36px; border: 1px solid var(--accent); border-radius: 6px; color: var(--accent); font-size: 20px; }
+.home-heading { margin: 0 0 14px; font-size: 23px; font-weight: 700; }
+.home-return { display: inline-block; margin-bottom: 14px; color: var(--accentDark); font-size: 14px; text-underline-offset: 4px; }
+body[data-page="index"] .tabs { margin-bottom: 20px; gap: 4px; }
+body[data-page="index"] .tab { min-width: 120px; padding-inline: 24px; }
+body[data-page="index"] .panel { padding: 24px; border-radius: 9px; box-shadow: none; }
+body[data-page="index"] .toolbar { margin-bottom: 18px; align-items: center; }
+body[data-page="index"] .toolbar h2 { font-size: 19px; }
+body[data-page="index"] .filters { margin: 16px 0 20px; gap: 8px; }
+body[data-page="index"] .lamp { border-radius: 5px; padding-inline: 14px; }
+body[data-page="index"] .lamp:not(.on) { opacity: 1; color: #647586; background: var(--card); border-style: dashed; }
+body[data-page="index"] .lamp.on { box-shadow: inset 0 -2px 0 #7a9bb54d; }
+body[data-page="index"] .list-table th { padding: 12px 10px; }
+body[data-page="index"] .list-table td { padding: 17px 10px; }
+body[data-page="index"] .finance-nav { grid-template-columns: 1fr 1fr; gap: 12px; max-width: 760px; margin-bottom: 28px; }
+body[data-page="index"] .finance-nav .ledger-button { min-height: 74px; font-size: 18px; background: var(--card); }
+body[data-page="index"] .finance-nav [aria-pressed="true"] { background: #eaf1f6; border-color: #7a9bb5; }
+.mobile-amount-guide { display: none; }
+.home-prototype-note { margin: 16px 0 0; font-size: 12px; color: var(--muted); }
+.settings-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+.settings-menu .btn { min-height: 52px; text-align: left; white-space: normal; }
+.settings-tax { border-top: 1px solid var(--line); padding-top: 18px; }
+@media(max-width:750px) {
+  body[data-page="index"] .shell { padding: 20px 16px; }
+  body[data-page="index"] .header { margin-bottom: 22px; }
+  body[data-page="index"] .brand { gap: 8px; font-size: 16px; }
+  .home-brand-mark { width: 30px; height: 30px; font-size: 18px; }
+  .home-heading { margin-bottom: 10px; font-size: 21px; }
+  body[data-page="index"] .tab { min-width: 0; flex: 1; }
+  body[data-page="index"] .panel { padding: 16px 12px; }
+  body[data-page="index"] .toolbar { margin-bottom: 14px; gap: 8px; }
+  body[data-page="index"] .toolbar h2 { font-size: 18px; }
+  body[data-page="index"] .filters { gap: 6px; margin: 12px 0 8px; }
+  body[data-page="index"] .lamp { padding-inline: 3px; }
+  .mobile-amount-guide { display: block; margin: 0 0 12px; text-align: right; font-size: 12px; color: var(--muted); }
+  body[data-page="index"] .jobcard { padding: 12px 10px; }
+  body[data-page="index"] .job-meta { width: auto; flex: 1; font-size: 12px; }
+  body[data-page="index"] .job-link .cardbottom { align-items: flex-end; flex-wrap: nowrap; }
+  body[data-page="index"] .cardmoney { font-size: 14px; }
+  body[data-page="index"] .cardname { font-size: 14px; }
+  body[data-page="index"] .badge { font-size: 12px; }
+  body[data-page="index"] .finance-nav { gap: 10px; }
+  body[data-page="index"] .finance-nav .ledger-button { min-height: 68px; font-size: 17px; }
+}
+@media(max-width:370px) {
+  body[data-page="index"] .shell { padding-inline: 10px; }
+  body[data-page="index"] .brand { font-size: 14px; }
+  body[data-page="index"] .job-link .cardbottom { flex-wrap: wrap; }
+  body[data-page="index"] .job-meta { flex-basis: 100%; }
+}
+@media(prefers-color-scheme:dark) {
+  .home-brand-mark { color: var(--accentDark); border-color: var(--accentDark); }
+  body[data-page="index"] .lamp:not(.on) { color: var(--muted); }
+  body[data-page="index"] .finance-nav [aria-pressed="true"] { background: #34495a; }
+}

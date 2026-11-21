@@ -55,15 +55,21 @@ function newId(){const year=new Date().getFullYear().toString();let max=0;for(co
 function openNewJob(){modal('工事の仮登録','<div class="stack"><div class="field"><label for="newjob-name">工事名</label><input id="newjob-name" placeholder="例：田中邸 給湯器交換"></div><p class="inlinehelp">工事No.は試作品内で仮採番します。本番ではサーバー上で自動採番します。</p></div>','工事登録',()=>{const name=el('newjob-name').value.trim();if(!name){toast('工事名を入力してください');return}const id=newId();db.jobs.unshift({id,name,category:'元請',client:'',honorific:'様',address:'',phone:'',start:'',end:'',ordered:'',completed:'',posted:'',lost:false,contract:null,budget:null,taxRate:standardTaxRate(),income:[],history:[]});persist();location.href=jobHref(id)});const input=el('newjob-name');input.focus();input.addEventListener('keydown',event=>{if(event.key==='Enter')confirmFn?.()})}
 function openSettings() {
   modal('設定', `
-    <form id="tax-settings">
+    <div class="settings-menu">
+      ${['事業者情報設定','決算月設定','業者マスター','単位マスター','ユーザー管理'].map(name => `<button type="button" class="btn" data-settings-preview="${name}">${name}</button>`).join('')}
+    </div>
+    <form id="tax-settings" class="settings-tax">
       <div class="field">
         <label for="standard-tax">標準消費税率（%）</label>
         <input id="standard-tax" type="number" min="0" step="any" required value="${html(standardTaxRate())}">
       </div>
       <p class="inlinehelp">新しく仮登録する工事に適用します。</p>
     </form>
-    <p class="muted">事業者情報設定・決算月・業者マスター・単位マスター・ユーザー管理は準備中です。</p>`,
-    '保存', () => el('tax-settings').requestSubmit());
+    <p class="inlinehelp">設定の各画面は準備中です。標準消費税率のみ試作品内に保存できます。</p>`,
+    '税率を保存', () => el('tax-settings').requestSubmit());
+  document.querySelectorAll('[data-settings-preview]').forEach(button => {
+    button.addEventListener('click', () => toast(`${button.dataset.settingsPreview}は準備中です`));
+  });
   el('tax-settings').addEventListener('submit', event => {
     event.preventDefault();
     db.standardTaxRate = el('standard-tax').valueAsNumber;
@@ -155,12 +161,19 @@ el('pay-cards').innerHTML=list.map(p=>{const j=db.jobs.find(j=>j.id===p.job);ret
   });
   display();
   showFinance('収支台帳');
+  const entryView = new URLSearchParams(location.search).get('view');
+  if (entryView === 'finance') document.querySelector('[data-tab="finance"]').click();
+  if (entryView === 'settings') {
+    el('jobs-panel').classList.add('hidden');
+    el('finance-panel').classList.add('hidden');
+    openSettings();
+  }
 }
 function detailPage(){const params=new URLSearchParams(location.search),id=params.get('id')||db.jobs[0].id;let job=db.jobs.find(j=>j.id===id);if(!job){location.href='index.html';return}
 let previousPosted=job.posted;
 function fill(){el('job-number').textContent='工事No. '+job.id;el('job-name').value=job.name;document.querySelectorAll('[name=category]').forEach(r=>r.checked=r.value===job.category);el('client-name').value=job.client||'';el('honorific').value=job.honorific||'様';el('client-address').value=job.address||'';el('client-phone').value=job.phone||'';el('period-start').value=job.start||'';el('period-end').value=job.end||'';el('order-date').value=job.ordered||'';el('completion-date').value=job.completed||'';el('posting-date').value=job.posted||'';render()}
 function render(){const s=status(job);el('detail-status').textContent=s;el('detail-status').dataset.status=s;el('metric-contract').textContent=yen(job.contract);el('metric-budget').textContent=yen(job.budget);const profit=job.contract!=null&&job.budget!=null?job.contract-job.budget:null;el('metric-profit').textContent=yen(profit);el('metric-rate').textContent=profit!==null&&job.contract?((profit/job.contract)*100).toFixed(1)+'%':'—';el('actual-metrics').classList.toggle('hidden',!job.posted);
-if(job.posted){const extra=job.internalActual||0;const actual=payrows(job).reduce((n,p)=>n+(Number(p.amount)||0),0)+extra;el('metric-actual').textContent=yen(actual);el('metric-actualprofit').textContent=job.contract==null?'—':yen(job.contract-actual);el('metric-actualrate').textContent=job.contract?((job.contract-actual)/job.contract*100).toFixed(1)+'%':'—';el('metrics-hint').textContent='デモ：実績原価は手入力された支払額の合計です。自社人工の実績評価は未設計。'}else{el('metrics-hint').textContent='実績原価・実績粗利益・実績利益率は計上後に表示します。'}
+if(job.posted){const extra=job.internalActual||0;const actual=payrows(job).reduce((n,p)=>n+(Number(p.amount)||0),0)+extra;el('metric-actual').textContent=yen(actual);el('metric-actualprofit').textContent=job.contract==null?'—':yen(job.contract-actual);el('metric-actualrate').textContent=job.contract?((job.contract-actual)/job.contract*100).toFixed(1)+'%':'—';el('metrics-hint').textContent='デモ：実績原価は手入力された支払額の合計です。自社人工の実績評価は未設計。'}else{el('metrics-hint').textContent='実績原価・実績利益・実績利益率は計上後に表示します。'}
 const hist=job.history||[];el('history-summary').textContent=hist.length?hist.slice(-3).map(x=>`${x.type} ${x.date}`).join(' ／ '):'出力履歴なし'}
 function readForm(){return {name:el('job-name').value.trim(),category:document.querySelector('[name=category]:checked')?.value||'元請',client:el('client-name').value.trim(),honorific:el('honorific').value,address:el('client-address').value,phone:el('client-phone').value,start:el('period-start').value,end:el('period-end').value,ordered:el('order-date').value,completed:el('completion-date').value,posted:el('posting-date').value}}
 function validatePosting(){const blank=payrows(job).filter(p=>p.amount===null||p.amount===''||p.amount===undefined);return blank}
