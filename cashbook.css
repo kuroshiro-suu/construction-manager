@@ -1,0 +1,43 @@
+.page-heading h1 { margin-bottom:0; } .intro { font-size:14px; color:#647586; margin:10px 0 20px; }
+.cash-summary { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.cash-summary>div { background:#fff; border:1px solid #b8c8d4; border-radius:6px; padding:16px 20px; }
+.cash-summary span { display:block; font-size:14px; color:#647586; }
+.cash-summary strong { display:block; text-align:right; font-size:25px; font-weight:650; font-variant-numeric:tabular-nums; margin-top:7px; }
+.cash-summary .difference { background:#edf3f7; border-color:#9db6c9; }
+.cash-summary .negative { color:#9c493c; }
+.date-col { width:12%; } .kind-col { width:12%; } .job-col { width:24%; } .money-col { width:16%; }
+.table-wrap th:nth-child(3),.table-wrap td:nth-child(3) { padding-right:12px; }
+.table-wrap th:nth-child(4),.table-wrap td:nth-child(4) { padding-left:12px; border-left:0; }
+.kind-badge { display:inline-block; padding:3px 7px; border:1px solid #a7c8b6; border-radius:4px; background:#e8f3ed; color:#32644d; font-size:12px; white-space:nowrap; }
+.kind-badge.payment { border-color:#a8bfd1; background:#eaf1f7; color:#345d7b; }
+.kind-badge.expense { border-color:#d9c3a5; background:#faf1e6; color:#88613b; }
+.book-description { font-size:14px; } .counterparty { display:block; margin-top:3px; color:#647586; font-size:12px; }
+.filters label.search { min-width:210px; } .filters input[type=date] { max-width:155px; }
+.report-status { color:#365c78; font-size:13px; min-height:20px; }
+@media(max-width:750px) {
+ .cash-summary { gap:8px; } .cash-summary>div { padding:12px 8px; } .cash-summary span { font-size:12px; } .cash-summary strong { font-size:17px; white-space:nowrap; }
+ .book-card-head { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px; } .book-card-head time { color:#647586; font-size:13px; }
+ .book-card-money { display:flex; justify-content:space-between; align-items:baseline; gap:16px; margin-top:12px; padding-top:9px; border-top:1px solid #dce5ec; }
+ .book-card-money span { color:#647586; font-size:12px; } .book-card-money strong { font-size:19px; font-variant-numeric:tabular-nums; } .book-card-job { font-size:13px; margin:8px 0 0; }
+ .filters input[type=date] { max-width:none; }
+}
+.difference-line { display:flex; justify-content:flex-end; align-items:baseline; gap:24px; margin-top:12px; padding:4px 2px; font-size:14px; color:#647586; }
+.difference-line strong { font-size:19px; color:#253443; font-variant-numeric:tabular-nums; }
+.difference-line strong.negative { color:#9c493c; }
+@media(max-width:750px) {
+ .cash-summary { grid-template-columns:minmax(0,1fr); gap:8px; }
+ .cash-summary>div { display:flex; align-items:baseline; justify-content:space-between; gap:12px; padding:12px 15px; min-width:0; }
+ .cash-summary span { font-size:14px; }
+ .cash-summary strong { margin-top:0; font-size:22px; }
+ .difference-line { justify-content:space-between; padding-inline:15px; }
+ .filters { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+ .filters label { min-width:0; }
+ .filters label.search { min-width:0; }
+}
+.period-buttons { display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin:0 0 18px; }
+.period-buttons button { min-width:76px; }
+.period-buttons button[aria-pressed=true] { background:#2e5f87; color:#fff; border-color:#2e5f87; }
+#period-label { font-size:13px; color:#647586; margin-left:8px; }
+@media(max-width:750px) { #period-label { flex-basis:100%; margin:4px 0 0; } }
+
+#fiscal-notice:not([hidden]){padding:12px 14px;background:#fff7e8;border:1px solid #e1cb9e;border-radius:4px;color:#705c34;font-size:13px}

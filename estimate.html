@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ja">
+<head><script src="deployment-config.js"></script><script src="deployment-bootstrap.js"></script><script src="beta-config.js"></script><script src="beta-gate.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>見積エディタ｜売上進捗管理システム</title><link rel="stylesheet" href="estimate.css"><script src="member-store.js"></script><script src="access-policy.js"></script><script src="access-runtime.js"></script><script src="vendor-store.js"></script></head>
+<body>
+<header class="app-header"><span>売上進捗管理システム</span><a id="back-link" href="construction.html">工事情報へ</a></header>
+<main>
+<div class="heading"><div><p class="eyebrow" id="estimate-job">操作確認用サンプル ／ 給湯器交換工事</p><h1>見積エディタ</h1></div><span class="sample-badge">UI試作</span></div>
+<p class="prototype-note" id="estimate-notice">この表は操作見本です。工事データには保存・連動しません。再読み込みで元に戻ります。</p>
+<section class="totals" aria-label="見積と原価の集計">
+<div class="total-block cost"><h2>原価</h2><dl><div><dt>税抜</dt><dd id="cost-net">0</dd></div><div><dt>消費税</dt><dd id="cost-tax">0</dd></div><div><dt>税込</dt><dd id="cost-gross">0</dd></div></dl></div>
+<div class="total-block quote"><h2>提出</h2><dl><div><dt>税抜</dt><dd id="quote-net">0</dd></div><div><dt>消費税</dt><dd id="quote-tax">0</dd></div><div><dt>税込</dt><dd id="quote-gross">0</dd></div></dl></div>
+
+</section>
+<div class="toolbar" aria-label="明細の操作"><div class="row-tools"><button id="add-page">＋ 1ページ追加</button><button id="add-row">＋1行追加</button><button id="insert-row">行を挿入</button><button id="delete-row">行を削除</button><button id="copy-range">コピー</button><button id="cut-range">切り取り</button><button id="clear-range">削除</button><button id="paste-range">貼り付け</button><button id="undo" title="直前の編集を1回だけ取り消します（Ctrl＋Z）" disabled>↶ 戻す</button></div><button id="save-estimate" class="save-estimate">見積を保存</button><span class="tax-note" id="estimate-tax">金額は税抜・円 ／ 税率10%の表示見本</span></div>
+<div class="sheet-scroll" role="region" aria-label="見積明細。横にスクロールできます" tabindex="0">
+<table aria-label="見積明細"><colgroup><col style="width:42px"><col style="width:240px"><col style="width:230px"><col style="width:52px"><col style="width:46px"><col style="width:90px"><col style="width:105px"><col style="width:52px"><col style="width:46px"><col style="width:90px"><col style="width:105px"><col style="width:130px"><col style="width:140px"></colgroup>
+<thead><tr><th rowspan="2" scope="col">No.</th><th rowspan="2" scope="col">名称</th><th rowspan="2" scope="col">仕様</th><th colspan="4" scope="colgroup" class="cost-group">原価</th><th colspan="4" scope="colgroup" class="quote-group">提出</th><th rowspan="2" scope="col">備考</th><th rowspan="2" scope="col">取引先</th></tr><tr><th class="cost-group">数量</th><th class="cost-group">単位</th><th class="cost-group">単価</th><th class="cost-group">金額</th><th class="quote-group">数量</th><th class="quote-group">単位</th><th class="quote-group">単価</th><th class="quote-group">金額</th></tr></thead>
+<tbody id="rows"></tbody>
+<tfoot id="summary-rows"></tfoot>
+</table>
+</div>
+<div class="sheet-bottom"><span id="row-count"></span><span id="page-info"></span><span id="selection-note">明細を選ぶと、その行に挿入・削除できます。</span><span class="compact-profit">想定利益 <strong id="profit">0</strong>円 ／ <strong id="profit-rate">—</strong></span></div>
+
+
+<p id="status" class="status" role="status" aria-live="polite"></p>
+<datalist id="units"><option value="式"><option value="㎡"><option value="m"><option value="台"><option value="枚"><option value="人工"><option value="個"></datalist>
+<datalist id="vendors"><option value="岡山設備"><option value="備前電工"><option value="自社"></datalist>
+</main><div id="cell-menu" class="cell-menu" role="menu" aria-label="選択範囲の操作" hidden><button type="button" role="menuitem" data-menu-action="copy">コピー<span>Ctrl＋C</span></button><button type="button" role="menuitem" data-menu-action="cut">切り取り<span>Ctrl＋X</span></button><button type="button" role="menuitem" data-menu-action="paste">貼り付け<span>Ctrl＋V</span></button><button type="button" role="menuitem" data-menu-action="clear">削除<span>Delete</span></button><hr><button type="button" role="menuitem" data-menu-action="insert-row">行を挿入</button><button type="button" role="menuitem" data-menu-action="delete-row">行を削除</button><hr><button type="button" role="menuitem" data-menu-action="undo">戻す<span>Ctrl＋Z</span></button></div><script src="unit-master.js"></script><script src="estimate-store.js"></script><script src="estimate-grid.js"></script><script src="cloud-page-loader.js" data-controller="estimate.js"></script>
+</body></html>

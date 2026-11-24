@@ -1,0 +1,85 @@
+:root { color-scheme: light; color: #253443; background: #f3f5f7; font-family: -apple-system,BlinkMacSystemFont,'Yu Gothic',Meiryo,sans-serif; font-size: 16px; }
+* { box-sizing: border-box; } body { margin: 0; } button,input { font: inherit; color: inherit; } button { cursor: pointer; border: 1px solid #aebfcd; background: white; border-radius: 4px; min-height: 36px; padding: 7px 13px; font-size: 14px; } button:hover { background: #edf3f7; } button:disabled { color: #7c8a96; background: #f4f6f8; cursor: default; } button:focus-visible,a:focus-visible { outline: 2px solid #2e5f87; outline-offset: 3px; }
+.app-header { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 25px 28px; font-size: 18px; font-weight: 650; } .app-header a { color: #2e5f87; font-weight: 400; font-size: 14px; text-underline-offset: 4px; white-space: nowrap; }
+main { margin: 0 28px 36px; } .heading { display: flex; justify-content: space-between; align-items: center; } h1 { font-size: 24px; margin: 4px 0 0; } .eyebrow { color: #647586; font-size: 13px; margin: 0; } .sample-badge { color: #637889; border: 1px solid #b7c7d3; border-radius: 4px; padding: 4px 8px; font-size: 12px; } .prototype-note { color: #647586; font-size: 12px; margin: 12px 0 20px; line-height: 1.6; }
+.totals { display: grid; grid-template-columns: 1fr 1fr .8fr; gap: 16px; margin-bottom: 20px; } .total-block { border: 1px solid #bdcbd5; background: #fff; border-radius: 5px; padding: 14px 18px; } .total-block h2 { margin: 0 0 9px; font-size: 15px; } .cost h2 { color: #456c69; } .quote h2 { color: #2e5f87; } dl { margin: 0; } dl>div { display: flex; justify-content: space-between; gap: 10px; margin-top: 6px; } dt { color: #627585; font-size: 13px; } dd { margin: 0; font-size: 16px; font-variant-numeric: tabular-nums; text-align: right; } dl>div:last-child { border-top: 1px solid #e0e7ed; padding-top: 7px; } .profit-block { align-content: center; padding: 8px 4px; } .profit-block>div { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin: 10px 0; } .profit-block span { font-size: 13px; color: #627585; } .profit-block strong { font-size: 20px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.toolbar,.row-tools,.sheet-bottom { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; } .toolbar { justify-content: space-between; margin-bottom: 10px; } .tax-note,.sheet-bottom span,.help { font-size: 12px; color: #647586; line-height: 1.7; } .sheet-scroll { overflow: auto; max-height: 62vh; border: 1px solid #91a6b6; background: white; } table { width: 100%; min-width: 1292px; border-collapse: separate; border-spacing: 0; table-layout: fixed; font-size: 14px; } th,td { border-right: 1px solid #c0ccd6; border-bottom: 1px solid #c0ccd6; padding: 0; } th:last-child,td:last-child { border-right: 0; } thead { position: sticky; top: 0; z-index: 2; } th { background: #eaf0f5; padding: 8px 4px; font-weight: 600; font-size: 13px; text-align: center; } th.cost-group { background: #e4efeb; color: #375f59; } th.quote-group { background: #e3edf6; color: #285775; } td input { width: 100%; min-width: 0; height: 37px; border: 0; border-radius: 0; padding: 7px 8px; background: transparent; font-size: 14px; outline-offset: -2px; } td input:focus { background: #fff; outline: 2px solid #2e5f87; } td.number input { text-align: right; font-variant-numeric: tabular-nums; } td.calculated { text-align: right; padding: 7px 8px; font-variant-numeric: tabular-nums; background: #f1f5f7; } td.cost-start,td.quote-start { border-left: 2px solid #9db3bd; } .row-number { text-align: center; color: #657c8b; background: #f6f8fa; cursor: pointer; font-size: 12px; } tr.selected .row-number { background: #2e5f87; color: white; } tr.selected td:not(.calculated):not(.row-number) { background: #f5f9fc; } tfoot th { text-align: right; padding: 9px 12px; } tfoot td { text-align: right; padding: 9px 8px; background: #f3f6f8; font-variant-numeric: tabular-nums; } tfoot tr:last-child td,tfoot tr:last-child th { background: #e6eef4; font-weight: 700; } .sheet-bottom { margin-top: 10px; gap: 14px; } .help { margin: 12px 0 0; } .status { min-height: 20px; color: #365c78; font-size: 13px; }
+@media(max-width:750px) { .app-header { padding: 20px 16px; font-size: 16px; } main { margin: 0 16px 28px; } .totals { grid-template-columns: 1fr 1fr; gap: 10px; } .total-block { padding: 12px; } .profit-block { grid-column: 1/-1; display: flex; justify-content: space-between; gap: 16px; padding: 0; flex-wrap: wrap; } .profit-block>div { flex: 1; min-width: 130px; margin: 3px 0; } .profit-block span { font-size: 12px; } .profit-block strong { font-size: 17px; } .sheet-scroll { max-height: 65vh; } .tax-note { width: 100%; margin-top: 5px; } }
+td:first-child input { text-align: center; padding-inline: 3px; } tr.selected td:first-child { box-shadow: inset 3px 0 #2e5f87; }
+.save-estimate { margin-left:auto; background:#2e5f87!important; color:white!important; border-color:#2e5f87!important; } input[readonly] { background:#edf1f4; color:#7d8b96; } button:disabled { opacity:.45; cursor:default; }
+/* 表を主役にしたコンパクトな編集画面 */
+body { height:100vh; height:100dvh; display:flex; flex-direction:column; overflow:hidden; }
+.app-header { flex:none; padding:7px 12px; font-size:12px; min-height:32px; border-bottom:1px solid #d3dde5; background:#f5f7f9; }
+.app-header a { font-size:12px; }
+main { flex:1; min-height:0; display:flex; flex-direction:column; margin:0; }
+.heading { flex:none; padding:7px 12px 3px; }
+.heading>div { display:flex; align-items:baseline; gap:14px; min-width:0; }
+h1 { order:-1; font-size:15px; margin:0; white-space:nowrap; }
+.eyebrow { font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sample-badge { font-size:10px; padding:1px 5px; white-space:nowrap; }
+.totals { display:none; }
+.prototype-note { display:none; }
+.prototype-note.is-important { display:block; flex:none; margin:4px 12px; padding:6px 9px; font-size:12px; background:#fff3e6; color:#895d37; }
+.toolbar { flex:none; justify-content:flex-start; gap:7px; margin:0; padding:5px 12px 7px; }
+button { min-height:28px; padding:3px 9px; font-size:12px; border-radius:2px; }
+.tax-note { margin:0; font-size:11px; }
+.sheet-scroll { flex:1; min-height:0; max-height:none; border-radius:0; border-left:0; border-right:0; }
+table { font-size:12px; }
+th { padding:3px 4px; height:23px; font-size:12px; font-weight:500; }
+td { height:25px; }
+td input { display:block; height:24px; padding:2px 5px; font-size:13px; line-height:20px; }
+td.calculated { padding:2px 5px; font-size:13px; }
+tfoot th,tfoot td { padding:4px 5px; height:27px; font-size:12px; }
+.sheet-bottom { flex:none; margin:0; padding:5px 12px; gap:14px; min-height:27px; background:#eef3f6; border-top:1px solid #cfdae3; }
+.sheet-bottom span { font-size:11px; }
+.compact-profit { margin-left:auto; font-variant-numeric:tabular-nums; }
+.compact-profit strong { font-weight:600; color:#36566e; }
+.status { flex:none; margin:0; padding:0 12px; min-height:0; font-size:12px; line-height:22px; }
+.status:empty { display:none; }
+@media(max-width:750px) { .app-header { padding:6px 8px; font-size:11px; } .app-header a { font-size:11px; } main { margin:0; } .heading { padding:6px 8px 2px; } .heading>div { flex-direction:column; gap:2px; } .eyebrow { max-width:76vw; font-size:11px; } .toolbar { padding:5px 8px; gap:6px; } .row-tools { gap:5px; } button { min-height:30px; font-size:11px; padding:3px 6px; } .tax-note { width:auto; margin:0; font-size:10px; } .sheet-scroll { max-height:none; } .sheet-bottom { padding:4px 8px; gap:7px; } .compact-profit { margin-left:auto; } td input { height:28px; line-height:24px; } td { height:29px; } }
+/* 一行はさらに密に。名称・仕様は内容に応じて折り返す。 */
+td { height:22px; vertical-align:middle; }
+td input { height:21px; padding:1px 5px; line-height:19px; font-size:12px; }
+td.calculated { padding:1px 5px; font-size:12px; }
+td.description-cell { padding:0; }
+td textarea { display:block; width:100%; min-width:0; min-height:20px; height:20px; margin:0; padding:2px 4px; border:0; border-radius:0; resize:none; overflow:hidden; background:transparent; color:inherit; font:11px/15px -apple-system,BlinkMacSystemFont,'Yu Gothic',Meiryo,sans-serif; white-space:pre-wrap; overflow-wrap:anywhere; word-break:normal; }
+td textarea:focus { background:white; outline:2px solid #2e5f87; outline-offset:-2px; }
+td textarea[readonly] { background:#edf1f4; color:#7d8b96; }
+@media(max-width:750px) { td { height:24px; } td input { height:23px; line-height:21px; } td textarea { min-height:22px; padding:3px 4px; } }
+/* ページ内の行数を安定させるため、改行の有無によらず全行を同じ高さに固定する。 */
+tbody td { height:25px; }
+tbody td input { height:24px; line-height:22px; }
+tbody td textarea { height:24px; min-height:24px; max-height:24px; padding:1px 4px; font-size:10px; line-height:11px; overflow:auto; scrollbar-width:none; }
+tbody td textarea::-webkit-scrollbar { display:none; }
+@media(max-width:750px) { tbody td { height:25px; } tbody td input { height:24px; line-height:22px; } tbody td textarea { height:24px; min-height:24px; max-height:24px; padding:1px 4px; font-size:10px; line-height:11px; } }
+/* 矩形選択とページ境界。集計行は選択・編集対象にしない。 */
+tbody td.range-selected { background:#dfebf6!important; }
+tbody td.active-cell { box-shadow:inset 0 0 0 2px #2e6c9b; }
+tbody td input:focus,tbody td textarea:focus { outline:none; background:transparent; }
+tbody tr.page-start:not(:first-child) td { border-top:2px solid #4c83aa; }
+tbody td.calculated:focus { outline:none; }
+#page-info { color:#8193a1; font-size:10px; }
+.sheet-scroll { overscroll-behavior:contain; }
+@media(max-width:750px) { #page-info { display:none; } }
+.cell-menu[hidden] { display:none; }
+.cell-menu { position:fixed; z-index:50; min-width:225px; max-width:calc(100vw - 8px); padding:5px; border:1px solid #b9c7d2; border-radius:5px; background:white; box-shadow:0 5px 18px #25344326; }
+.cell-menu button { display:flex; align-items:center; justify-content:space-between; gap:28px; width:100%; min-height:33px; padding:6px 10px; border:0; border-radius:2px; background:white; text-align:left; font-size:13px; }
+.cell-menu button span { color:#8b99a5; font-size:11px; }
+.cell-menu button:hover,.cell-menu button:focus-visible { background:#e9f1f7; outline:none; }
+.cell-menu button:disabled { color:#a8b2ba; opacity:.6; }
+.cell-menu hr { border:0; border-top:1px solid #e1e7ed; margin:4px; }
+/* 原価＝淡いオレンジ、提出＝淡い緑。 */
+thead th.cost-group { background:#f8e9d9; color:#795b40; }
+thead th.quote-group { background:#e4efeb; color:#375f59; }
+tbody td:nth-child(n+4):nth-child(-n+7) { background:#fff7ef; }
+tbody td:nth-child(n+8):nth-child(-n+11) { background:#f0f7f3; }
+tbody td:nth-child(7) { background:#faeee1; }
+tbody td:nth-child(11) { background:#e4efeb; }
+tfoot td:nth-child(2) { background:#faeee1; }
+tfoot td:nth-child(4) { background:#e4efeb; }
+#undo { border-radius:8px; background:#edf2f6; border-color:#b7c8d6; }
+tbody td input[data-key="vendor"] { font-size:10.67px; }
+table { min-width:1354px; }
+/* 2段ヘッダーの末尾は表全体の右端ではないため、提出金額の右罫線を残す。 */
+thead tr:nth-child(2) th:last-child { border-right:1px solid #c0ccd6; }
+thead tr:first-child th:nth-child(5),tbody td:nth-child(11),tfoot td:nth-child(4) { border-right:1px solid #a7b9c5; }

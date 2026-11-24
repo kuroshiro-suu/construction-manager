@@ -1,0 +1,22 @@
+.outstanding { max-width:580px; }
+.vendor-col { width:15%; } .job-col { width:24%; } .money-col { width:18%; } .date-col { width:12%; } .state-col { width:10%; } .memo-col { width:9%; }
+.amount-hint { display:block; font-size:11px; font-weight:400; line-height:1.5; color:#8a622a; white-space:normal; margin-top:3px; }
+.badge.pending { background:#fff7da; border-color:#d6bf78; color:#80611d; }
+.table-wrap th:nth-child(4),.table-wrap td:nth-child(4) { padding-left:12px; }
+.vendor-name { font-size:15px; font-weight:650; margin:0; }
+.payment-job { margin-top:6px; }
+.payment-job a { font-weight:400; }
+.payment-memo { margin:9px 0 0; font-size:12px; color:#647586; }
+@media(max-width:750px) { .outstanding { align-items:center; } .outstanding strong { font-size:22px; } .outstanding small { font-size:11px; } .card-amount { margin-top:10px; } .amount-hint { font-size:12px; } }
+.budget-amount { display:block; font-size:13px; font-weight:400; color:#647586; white-space:normal; }
+@media(max-width:750px) { .budget-amount { font-size:15px; } }
+.vendor-col { width:12%; } .job-col { width:21%; } .budget-col { width:14%; text-align:right; } .money-col { width:17%; } .date-col { width:11%; } .state-col { width:8%; } .memo-col { width:6%; }
+.budget-value { color:#647586; font-variant-numeric:tabular-nums; text-align:right; }
+.table-wrap th:nth-child(4),.table-wrap td:nth-child(4) { padding-left:12px; border-left:0; }
+.table-wrap th:nth-child(5),.table-wrap td:nth-child(5) { padding-left:16px; border-left:1px solid #dbe3ea; }
+@media(max-width:750px) {
+ .payment-amounts { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px; margin-top:12px; }
+ .amount-label { display:block; font-size:12px; color:#647586; margin-bottom:4px; text-align:right; }
+ .payment-amounts .card-amount { margin-top:0; font-size:17px; }
+ .payment-amounts .budget-value { font-size:16px; }
+}

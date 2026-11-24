@@ -1,0 +1,50 @@
+<!doctype html><html lang="ja"><head><script src="deployment-config.js"></script><script src="deployment-bootstrap.js"></script><script src="beta-config.js"></script><script src="beta-gate.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>事業者情報設定｜売上進捗管理システム</title><link rel="stylesheet" href="settings.css"><link rel="stylesheet" href="business.css"><script src="member-store.js"></script><script src="access-policy.js"></script><script src="access-runtime.js"></script></head><body>
+<header><span>売上進捗管理システム</span><a href="settings.html">設定へ戻る</a></header><main>
+<div class="page-heading"><h1>事業者情報設定</h1><span class="sample">UI試作</span></div>
+<p class="intro">見積書・請求書などに載せる、ご自身の事業者情報です。</p>
+<form id="business-form"><div class="profile-grid"><div>
+<section class="panel"><h2>基本情報</h2><div class="fields"><label>事業者区分<select name="businessType" required><option value="">選択してください</option><option value="individual">個人</option><option value="corporation">法人</option></select></label>
+<label>事業者名<span class="help">法人名、または個人事業主の氏名</span><input name="businessName" autocomplete="organization" placeholder="例：株式会社 岡山建設"></label>
+<label>屋号<span class="optional">任意</span><input name="tradeName" placeholder="例：岡山住設"></label><div><div class="pair"><label>肩書<input name="representativeTitle" placeholder="例：代表・代表取締役・社長"></label><label>代表者名<input name="representative" placeholder="例：岡山 太郎"></label></div><label class="print-check"><input type="checkbox" name="printRepresentative">肩書・代表者名を見積書・請求書に載せる</label></div>
+<label>郵便番号<input class="postal" name="postalCode" autocomplete="postal-code" placeholder="例：700-0000"></label>
+<label>所在地<input name="address" autocomplete="street-address" placeholder="都道府県・市区町村・番地・建物名"></label>
+<div class="pair"><label>電話番号<input name="phone" type="tel" autocomplete="tel" placeholder="例：086-000-0000"></label><label>FAX<span class="optional">任意</span><input name="fax" type="tel" placeholder="例：086-000-0001"></label></div>
+<label>メールアドレス<input name="email" type="email" autocomplete="email" placeholder="例：info@example.com"></label>
+</div></section></div><div>
+<section class="panel"><h2>インボイス登録番号</h2><label class="sr-label" for="invoice-number">登録番号</label><input id="invoice-number" name="invoiceNumber" placeholder="T0000000000000" pattern="T[0-9]{13}" maxlength="14" title="半角のTに続けて、数字13桁を入力してください。" spellcheck="false"><p class="help">T＋数字13桁。登録していない場合は空欄で構いません。</p></section>
+<section class="panel"><h2>請求書に載せる振込先</h2><div class="fields"><div class="pair"><label>金融機関名<input name="bank" placeholder="例：岡山銀行"></label><label>支店名<input name="branch" placeholder="例：本店営業部"></label></div>
+<div class="account-row"><label>口座種別<select name="accountType"><option value="">選択してください</option><option>普通</option><option>当座</option><option>貯蓄</option></select></label><label>口座番号<input name="accountNumber" inputmode="numeric" placeholder="例：0123456"></label></div>
+<label>口座名義（カナ）<input name="accountHolder" placeholder="例：カ）オカヤマケンセツ"></label></div></section>
+<section class="panel seal-panel"><h2>印影<span class="optional">任意</span></h2><div class="seal-controls"><div id="seal-preview" class="seal-preview">未選択</div><div><label class="file-button">PNG画像を選ぶ<input id="seal-file" type="file" accept="image/png"></label><button id="remove-seal" type="button" hidden>取り消す</button><p class="help">背景が透明なPNGが必須です。保存すると帳票に使用します。</p></div></div><p id="seal-status" role="status"></p></section>
+</div></div>
+<section class="panel work-types" aria-labelledby="work-types-heading"><h2 id="work-types-heading">建設業の許可<span class="optional">複数選択可</span></h2><div class="work-type-grid"><label class="work-type"><input type="checkbox" name="workTypes" value="一式"><span>一式</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="大工工事"><span>大工工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="左官工事"><span>左官工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="とび・土工工事"><span>とび・土工工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="石工事"><span>石工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="屋根工事"><span>屋根工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="電気工事"><span>電気工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="管工事"><span>管工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="タイル・れんが・ブロック工事"><span>タイル・れんが・ブロック工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="鋼構造物工事"><span>鋼構造物工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="鉄筋工事"><span>鉄筋工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="舗装工事"><span>舗装工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="しゅんせつ工事"><span>しゅんせつ工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="板金工事"><span>板金工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="ガラス工事"><span>ガラス工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="塗装工事"><span>塗装工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="防水工事"><span>防水工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="内装仕上工事"><span>内装仕上工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="機械器具設置工事"><span>機械器具設置工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="熱絶縁工事"><span>熱絶縁工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="電気通信工事"><span>電気通信工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="造園工事"><span>造園工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="さく井工事"><span>さく井工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="建具工事"><span>建具工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="水道施設工事"><span>水道施設工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="消防施設工事"><span>消防施設工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="清掃施設工事"><span>清掃施設工事</span></label>
+<label class="work-type"><input type="checkbox" name="workTypes" value="解体工事"><span>解体工事</span></label></div></section>
+<section class="panel" aria-labelledby="qualifications-heading"><h2 id="qualifications-heading">資格<span class="optional">複数選択可</span></h2><div class="work-type-grid"><label class="work-type"><input type="checkbox" name="qualifications" value="石綿調査者"><span>石綿調査者</span></label><label class="work-type"><input type="checkbox" name="qualifications" value="石綿作業主任者"><span>石綿作業主任者</span></label></div></section>
+<div class="form-footer"><p class="help">項目の配置を確認する試作です。入力内容・印影はこのブラウザに保存します。</p><button class="primary" type="submit">保存</button></div><p id="business-status" role="status" aria-live="polite"></p></form>
+</main><script src="cloud-page-loader.js" data-controller="business.js"></script></body></html>

@@ -1,0 +1,15 @@
+(()=>{'use strict';const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));let rows=[],history=[],before=null;
+function remember(values=rows){history.push([...values]);if(history.length>1)history.shift();$('undo').disabled=false;}
+function render(){before=null;$('units-rows').innerHTML=rows.map((v,i)=>`<tr><td>${i+1}</td><td><input data-row="${i}" aria-label="${i+1}行目の単位" value="${esc(v)}"></td><td><button class="remove" data-remove="${i}" aria-label="${i+1}行目を削除">削除</button></td></tr>`).join('');$('count').textContent=rows.filter(v=>v.trim()).length+'候補';}
+$('units-rows').addEventListener('focusin',e=>{if(e.target.matches('input'))before=[...rows];});
+$('units-rows').addEventListener('input',e=>{if(!e.target.matches('input'))return;if(before){remember(before);before=null;}rows[+e.target.dataset.row]=e.target.value;$('unit-status').textContent='変更はまだ保存されていません。';});
+$('units-rows').addEventListener('click',e=>{const b=e.target.closest('[data-remove]');if(!b)return;remember();rows.splice(+b.dataset.remove,1);render();});
+$('units-rows').addEventListener('paste',e=>{if(!e.target.matches('input'))return;const data=e.clipboardData.getData('text/plain').replace(/\r\n?/g,'\n').replace(/\n$/,'').split('\n');e.preventDefault();if(data.some(v=>v.includes('\t'))){$('unit-status').textContent='単位の1列だけをコピーして貼り付けてください。';return;}remember();const at=+e.target.dataset.row;data.forEach((v,i)=>rows[at+i]=v);render();});
+$('units-rows').addEventListener('keydown',e=>{if(e.isComposing||e.key!=='Enter'||!e.target.matches('input'))return;e.preventDefault();const next=+e.target.dataset.row+(e.shiftKey?-1:1);if(next<0)return;if(next===rows.length){remember();rows.push('');render();}document.querySelector(`[data-row="${next}"]`)?.focus();});
+document.querySelector('aside a').addEventListener('click',event=>{if(window.self!==window.top){event.preventDefault();window.top.location.href='estimate-preview.html';}});
+$('add').onclick=()=>{remember();rows.push('');render();document.querySelector(`[data-row="${rows.length-1}"]`).focus();};
+$('undo').onclick=()=>{if(!history.length)return;rows=history.pop();render();$('undo').disabled=!history.length;$('unit-status').textContent='直前の編集を元に戻しました。';};
+$('save').onclick=async()=>{try{if(window.cloudRuntime)await window.cloudRuntime.checkAccess();window.unitMaster.save(rows.filter(v=>v.trim()));if(window.cloudRuntime)await window.cloudRuntime.flush();$('unit-status').textContent='候補を保存しました。見積エディタの原価・提出の単位欄に反映されます。';}catch(e){$('unit-status').textContent='保存できませんでした。既存の候補は変更していません。';}};
+window.attachSimpleGrid({root:$('units-rows'),columns:1,read:()=>rows.map(v=>[v]),commit:next=>{remember();rows=next.map(r=>r[0]);render();$('unit-status').textContent='変更はまだ保存されていません。';},undo:()=>$('undo').click(),status:message=>$('unit-status').textContent=message});
+try{rows=window.unitMaster.read();render();}catch(e){$('unit-status').textContent='保存済みの候補を読み取れませんでした。既存データを保護するため編集を止めています。';$('add').disabled=$('save').disabled=true;}
+})();

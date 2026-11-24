@@ -1,0 +1,133 @@
+body[data-page="construction"] { font-size: 16px; }
+body[data-page="construction"] .shell { max-width: 1160px; padding: 28px 32px; }
+body[data-page="construction"] .header { margin-bottom: 24px; gap: 16px; }
+body[data-page="construction"] .brand { font-size: 19px; }
+.back-to-list { color: #2e5f87; font-size: 14px; text-underline-offset: 4px; white-space: nowrap; }
+body[data-page="construction"] .panel { padding: 26px 28px; box-shadow: none; border-radius: 9px; }
+.detailtop h1 { margin: 4px 0 0; font-size: 24px; }
+body[data-page="construction"] .badge { font-size: 13px; padding: 6px 11px; }
+.detail-columns { display: grid; grid-template-columns: 1fr 1.1fr; gap: 36px; }
+.detail-section { border-top: 1px solid #d0dae3; padding-top: 18px; margin-top: 18px; }
+.detail-section h2 { font-size: 16px; margin: 0 0 16px; }
+.detail-section .field { margin-bottom: 12px; }
+body[data-page="construction"] .field label,.category-field legend { font-size: 14px; color: #526575; font-weight: 600; }
+body[data-page="construction"] input,body[data-page="construction"] select { min-height: 44px; font-size: 16px; }
+.category-field { border: 0; padding: 0; margin: 0 0 10px; }
+.category-field legend { padding: 0; }
+body[data-page="construction"] .radioline { gap: 12px; padding: 6px 0; }
+body[data-page="construction"] .radioline label { display: flex; align-items: center; gap: 7px; min-height: 36px; font-size: 14px; }
+body[data-page="construction"] .radioline input { min-height: 0; width: 17px; height: 17px; accent-color: #2e5f87; }
+.progress-dates { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
+body[data-page="construction"] .period { grid-template-columns: minmax(0,1fr) 16px minmax(0,1fr); gap: 7px; }
+body[data-page="construction"] .metrics { display: block; }
+body[data-page="construction"] .metric { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 7px 0; border: 0; border-bottom: 1px solid #e1e7ec; border-radius: 0; background: none; }
+body[data-page="construction"] .metric small { font-size: 14px; }
+body[data-page="construction"] .metric b { font-size: 18px; font-variant-numeric: tabular-nums; text-align: right; }
+.amount-note { float: right; color: #647586; font-size: 12px; font-weight: 400; }
+body[data-page="construction"] .sectionhint { font-size: 12px; margin: 8px 0 0; }
+.detail-actions { margin-top: 24px; padding-top: 22px; border-top: 1px solid #d0dae3; }
+body[data-page="construction"] .mainbuttons button { min-height: 50px; background: #f6f9fb; border-radius: 5px; font-size: 16px; padding: 12px 8px; }
+body[data-page="construction"] .history { width: 100%; text-align: left; font: inherit; color: inherit; background: #fff; border-radius: 5px; }
+.history b { font-size: 13px; }
+.history-summary { display: block; margin-top: 3px; font-size: 12px; }
+.history-detail { font-size: 13px; color: #2e5f87; }
+body[data-page="construction"] .btn { min-height: 44px; font-size: 14px; }
+#save-job { min-width: 120px; }
+.prototype-note { font-size: 12px; color: #647586; margin: 14px 0; }
+@media(max-width:750px) {
+ body[data-page="construction"] .shell { padding: 20px 14px; }
+ body[data-page="construction"] .brand { font-size: 16px; }
+ body[data-page="construction"] .header { margin-bottom: 18px; }
+ body[data-page="construction"] .panel { padding: 20px 16px; }
+ .detail-columns { grid-template-columns: 1fr; gap: 0; }
+ .detailtop h1 { font-size: 22px; }
+ .progress-dates { grid-template-columns: 1fr; gap: 0; }
+ .progress-dates .field { display: grid; grid-template-columns: 64px minmax(0,1fr); align-items: center; gap: 12px; }
+ body[data-page="construction"] .mainbuttons { gap: 6px; }
+ body[data-page="construction"] .mainbuttons button { font-size: 13px; padding: 10px 3px; }
+ body[data-page="construction"] .metric b { font-size: 18px; }
+ .detail-actions { margin-top: 22px; }
+}
+@media(max-width:360px) { body[data-page="construction"] .brand { font-size: 14px; } .back-to-list { font-size: 12px; } body[data-page="construction"] .panel { padding-inline: 12px; } }
+.guest-permission { margin:20px 0; border:1px solid #e3d8aa; border-radius:5px; background:#fff9e6; } .guest-permission summary { cursor:pointer; padding:13px 16px; color:#45677f; font-size:13px; } #guest-permission-summary { margin-left:16px; font-size:12px; color:#7d8f9d; } .guest-permission-body { padding:0 16px 14px; } .guest-person { display:flex; align-items:center; gap:10px; min-height:30px; padding:3px 0; margin:0; font-size:14px; } .guest-person input { width:18px; height:18px; accent-color:#2e5f87; margin:0; } .guest-creator { color:#789080; border:1px solid #c9d9cf; border-radius:4px; padding:2px 6px; font-size:11px; } @media(max-width:600px) { #guest-permission-summary { display:block; margin:5px 0 0 16px; } }
+
+.document-fields{margin-bottom:22px}.document-fields h2{font-size:16px}.document-field-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 22px}.document-fields textarea{width:100%;box-sizing:border-box;font:inherit;padding:10px;border:1px solid #c6d2dc;border-radius:4px}.bottomtools{flex-wrap:wrap}.bottomtools a{text-decoration:none;display:inline-flex;align-items:center}@media(max-width:750px){.document-field-grid{grid-template-columns:1fr}.period{min-width:0}.period input{min-width:0;width:100%}}
+
+@media(max-width:750px){body[data-page="construction"] .period{display:grid;grid-template-columns:1fr;gap:4px}.period span{text-align:center;line-height:1;font-size:12px}.period input{width:100%;min-width:0}}
+/* 項目を少しコンパクトにし、業務ごとのまとまりを明示する。 */
+body[data-page="construction"]{font-size:15px}
+body[data-page="construction"] .panel{padding:22px 24px;background:#fff}
+.detail-columns{gap:22px;align-items:start}
+.detail-section,.document-fields{border:1px solid #d4dfe7;border-radius:6px;padding:15px 17px;margin-top:16px;background:#f8fafc}
+.detail-section h2,.document-fields h2{font-size:15px;margin:0 0 13px;padding-bottom:9px;border-bottom:1px solid #dce5ec;color:#294e68;letter-spacing:.03em}
+.detail-section .field{margin-bottom:9px}
+body[data-page="construction"] .field label,.category-field legend{font-size:13px}
+body[data-page="construction"] input,body[data-page="construction"] select{font-size:15px;min-height:39px;padding:7px 9px}
+body[data-page="construction"] .radioline label{font-size:13px;min-height:29px}
+body[data-page="construction"] .radioline input{min-height:0;padding:0;width:16px;height:16px}
+body[data-page="construction"] .metric small{font-size:13px}
+body[data-page="construction"] .metric b{font-size:17px}
+.finance-section{background:#f0f6f8;border-color:#c3d5df}
+body[data-page="construction"] .metric{padding:6px 0}
+.detail-actions{margin-top:18px;padding-top:0;border-top:0}
+.document-fields{background:#faf9f6;border-color:#dedbd2;margin-bottom:18px}
+.document-fields textarea{font-size:15px;padding:8px}
+body[data-page="construction"] .mainbuttons button{font-size:15px;min-height:44px;padding:10px 8px}
+body[data-page="construction"] .btn{font-size:13px;min-height:39px}
+.guest-permission{margin:16px 0}
+.guest-permission summary{padding:10px 14px}
+@media(max-width:750px){
+ body[data-page="construction"] .panel{padding:16px 12px}
+ .detail-section,.document-fields{padding:13px 12px;margin-top:13px}
+ .detail-columns{gap:0}
+ body[data-page="construction"] .mainbuttons button{font-size:12px;padding:10px 3px}
+ body[data-page="construction"] .metric b{font-size:17px}
+}
+/* PCは横幅を活用し、ラベルと入力を並べて縦の移動を減らす。 */
+#actual-metrics{margin-top:8px;padding-top:5px;border-top:1px solid #b6cbd6}
+@media(min-width:751px){
+ body[data-page="construction"] .shell{padding-top:18px;padding-bottom:18px}
+ body[data-page="construction"] .header{margin-bottom:14px}
+ body[data-page="construction"] .panel{padding:16px 20px}
+ .detail-columns{gap:18px}
+ .detail-section,.document-fields{padding:10px 13px;margin-top:10px}
+ .detail-section h2,.document-fields h2{margin-bottom:8px;padding-bottom:6px}
+ .detail-section .field{display:grid;grid-template-columns:80px minmax(0,1fr);align-items:center;gap:8px;margin-bottom:6px}
+ .detail-section .formrow .field{display:block}
+ .progress-dates .field{display:block}
+ body[data-page="construction"] input,body[data-page="construction"] select{min-height:32px;padding:4px 7px}
+ body[data-page="construction"] .radioline label{min-height:24px}
+ .category-field{margin-bottom:5px}
+ body[data-page="construction"] .radioline{padding:2px 0}
+ body[data-page="construction"] .metric{padding:3px 0}
+ body[data-page="construction"] .metric b{font-size:16px}
+ body[data-page="construction"] .sectionhint{margin-top:5px;font-size:11px}
+ .document-field-grid{gap:5px 16px}
+ .document-fields .field{margin-bottom:3px}
+ .document-fields textarea{height:48px;min-height:48px;padding:5px 7px}
+ .guest-permission{margin:10px 0}
+ .guest-permission summary{padding:7px 12px}
+ .detail-actions{margin-top:10px}
+ .document-fields{margin-bottom:10px}
+ body[data-page="construction"] .mainbuttons button{min-height:36px;padding:6px}
+ body[data-page="construction"] .btn{min-height:34px;padding:6px 12px}
+}
+/* 左列に編集情報を集め、補助操作と更新を分離する。 */
+.basic-column .document-field-grid{grid-template-columns:1fr;gap:7px}
+.basic-column .document-fields{margin-bottom:0}
+.basic-column .guest-permission{margin-bottom:0}
+.basic-column #guest-permission-summary{display:block;margin:4px 0 0 16px}
+.secondary-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+body[data-page="construction"] .bottomtools{align-items:center;justify-content:space-between;gap:16px}
+body[data-page="construction"] #save-job{margin-left:auto}
+@media(min-width:751px){.basic-column .document-fields .field{display:grid;grid-template-columns:105px minmax(0,1fr);gap:6px 10px;align-items:center}.basic-column .document-fields .sectionhint{grid-column:2}.basic-column .document-fields textarea{width:100%;min-width:0}.basic-column .document-fields input{min-width:0}}
+/* 長めの入力内容が収まりやすい文字サイズ。 */
+body[data-page="construction"] input:not([type="radio"]):not([type="checkbox"]),
+body[data-page="construction"] select,
+body[data-page="construction"] .document-fields textarea{font-size:14px}
+
+.progress-dates input:disabled{background:#e7eaee;color:#596575;opacity:1;cursor:default}.progress-action{margin-top:5px;padding:5px 10px;font-size:12px}.progress-checks{padding-left:18px;font-size:13px;line-height:1.7}.progress-checks .ok{color:#3e6557}.progress-checks .missing,#transition-error{color:#ad492c}.progress-date{margin-top:16px}.modal{max-height:85vh;overflow:auto}
+
+/* テキスト欄の高さ・内側余白をチェック欄に適用しない。 */
+body[data-page="construction"] input[type="checkbox"]{min-height:0;padding:0}
+#guest-permission-list{margin-top:8px}

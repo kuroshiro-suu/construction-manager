@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+<head><script src="deployment-config.js"></script><script src="deployment-bootstrap.js"></script><script src="beta-config.js"></script><script src="beta-gate.js"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>工事情報｜売上進捗管理システム</title>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="construction.css">
+<link rel="stylesheet" href="documents-ui.css"><script src="member-store.js"></script><script src="access-policy.js"></script><script src="access-runtime.js"></script></head>
+<body data-page="construction">
+<main class="shell">
+<header class="header"><div class="brand">売上進捗管理システム</div><a class="back-to-list" href="index.html">工事一覧へ</a></header>
+<section class="panel">
+<div class="detailtop"><div><div class="tiny muted" id="job-number"></div><h1>工事情報</h1></div><span id="detail-status" class="badge"></span></div>
+<div class="detail-columns">
+<div class="basic-column">
+<section class="detail-section" aria-labelledby="basic-heading">
+<h2 id="basic-heading">基本情報</h2>
+<fieldset class="category-field"><legend>受注区分</legend><div class="radioline"><label><input name="category" type="radio" value="自社">自社</label><label><input name="category" type="radio" value="下請">下請</label><label><input name="category" type="radio" value="元請">元請</label></div></fieldset>
+<div class="field"><label for="job-name">工事名</label><input id="job-name"></div><div class="field"><label for="job-place">工事場所</label><input id="job-place"></div>
+</section>
+<section class="detail-section" aria-labelledby="client-heading">
+<h2 id="client-heading">施主・元請情報</h2>
+<div class="formrow"><div class="field"><label for="client-name">氏名・会社名</label><input id="client-name"></div><div class="field"><label for="honorific">敬称</label><select id="honorific"><option>様</option><option>御中</option></select></div></div>
+<div class="field"><label for="client-address">住所</label><input id="client-address" autocomplete="street-address"></div>
+<div class="field"><label for="client-phone">電話番号</label><input id="client-phone" type="tel"></div>
+</section>
+
+<section class="document-fields"><h2>見積・帳票の情報</h2><div class="document-field-grid"><div class="field"><label for="estimate-date">見積書提出日</label><input type="date" id="estimate-date"></div><div class="field"><label for="estimate-expiry">見積の有効期限</label><input id="estimate-expiry" placeholder="例：提出日より30日間"></div><div class="field"><label for="payment-terms">支払条件</label><input id="payment-terms" list="payment-term-options"><datalist id="payment-term-options"><option value="完成引渡時100％"><option value="契約時30％・完成引渡時70％"><option value="契約時30％・中間金30％・完成引渡時40％"></datalist><p class="sectionhint">候補から選択、または出来高払いなど自由に入力できます。</p></div><div class="field"><label for="estimate-terms">見積条件</label><textarea id="estimate-terms" rows="3"></textarea></div></div><p class="sectionhint">見積番号は工事No.と共通です。変更後は「更新」で保存します。</p></section>
+</div>
+<div class="progress-column">
+<section class="detail-section" aria-labelledby="dates-heading">
+<h2 id="dates-heading">工期・進捗</h2>
+<div class="field"><label>予定工期</label><div class="period"><input type="date" id="period-start" aria-label="予定工期の着工日"><span>〜</span><input type="date" id="period-end" aria-label="予定工期の完工日"></div></div>
+<div class="field"><label>実績工期</label><div class="period"><input type="date" id="actual-start" aria-label="実績工期の着工日"><span>〜</span><input type="date" id="actual-end" aria-label="実績工期の完工日"></div></div><div class="progress-dates"><div class="field"><label for="order-date">受注日</label><input type="date" id="order-date" disabled><button type="button" class="progress-action" id="order-action">受注する</button></div><div class="field"><label for="completion-date">完工日</label><input type="date" id="completion-date"></div><div class="field"><label for="posting-date">計上日</label><input type="date" id="posting-date" disabled><button type="button" class="progress-action" id="posting-action">計上する</button></div></div>
+<p class="sectionhint">予定工期は発注書・請書、実績工期は請求書に使用します。完工日は完成引渡日として使用します。</p>
+<div id="posting-alert" class="notice hidden"></div>
+</section>
+<section class="detail-section finance-section" aria-labelledby="finance-heading">
+<h2 id="finance-heading">工事収支 <span class="amount-note">予定金額は税抜</span></h2>
+<div class="metrics"><div class="metric"><small>請負金額</small><b id="metric-contract">—</b></div><div class="metric"><small>実行予算額</small><b id="metric-budget">—</b></div><div class="metric"><small>想定利益</small><b id="metric-profit">—</b></div><div class="metric"><small>想定利益率</small><b id="metric-rate">—</b></div></div>
+<div class="metrics actual" id="actual-metrics"><div class="metric"><small>実績原価（試算）</small><b id="metric-actual">—</b></div><div class="metric"><small>実績利益（試算）</small><b id="metric-actualprofit">—</b></div><div class="metric"><small>実績利益率（試算）</small><b id="metric-actualrate">—</b></div></div>
+<div class="sectionhint" id="metrics-hint"></div><p class="sectionhint">※会計上の利益とは異なります。</p>
+</section>
+<details class="guest-permission"><summary><span>ゲストの編集許可</span><span id="guest-permission-summary"></span></summary><div class="guest-permission-body"><p class="sectionhint">この工事を編集できるゲストを選択できます。<br>ただし、ステータス「未受注」の時点に限り、受注後は閲覧・編集権限を失効します。<br>変更は「更新」で保存します。</p><div id="guest-permission-list"></div></div></details>
+</div>
+</div>
+
+<section class="detail-actions" aria-label="工事に関する操作">
+<div class="mainbuttons"><button data-action="estimate">見積作成</button><button data-action="cash">入金・支払</button><button data-action="documents">帳票出力</button></div>
+<button class="history" data-action="history"><span><b>帳票出力状況</b><span class="history-summary muted" id="history-summary"></span></span><span class="history-detail">詳細</span></button>
+<div class="bottomtools"><div class="secondary-actions"><button class="btn ghost" data-action="branch">＋ 追加工事</button><a class="btn ghost" id="memorandum-link" href="memorandum.html">汎用覚書</a></div><button class="btn primary" id="save-job">更新</button></div>
+</section>
+</section>
+<p class="prototype-note">画面の試作です。金額はサンプル、保存先はこのブラウザ内です。</p>
+</main>
+<div class="modalwrap" id="modalwrap" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal"><h3 id="modal-title"></h3><div id="modal-content"></div><div class="modalfooter"><button class="btn" id="modal-close">閉じる</button><button class="btn primary hidden" id="modal-confirm">登録</button></div></div></div><div id="toast" role="status"></div>
+<script src="guest-permissions.js"></script><script src="documents-ui.js"></script><script src="cash-ledger.js"></script><script src="cash-store.js"></script><script src="progress-model.js"></script><script src="cloud-page-loader.js" data-controller="app.js"></script>
+</body>
+</html>

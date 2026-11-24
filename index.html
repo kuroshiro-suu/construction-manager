@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja">
+<head><script src="deployment-config.js"></script><script src="deployment-bootstrap.js"></script><script src="beta-config.js"></script><script src="beta-gate.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>工事一覧｜売上進捗管理システム</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="home.css">
+<script src="member-store.js"></script><script src="access-policy.js"></script><script src="access-runtime.js"></script></head>
+<body data-page="index">
+<main class="shell">
+<header class="header"><div class="brand"><span>売上進捗管理システム</span></div><div class="header-right"><button class="btn ghost" data-modal="settings">設定</button></div>
+</header>
+<a href="home.html" class="home-return">ホームへ</a>
+<nav class="tabs" aria-label="業務画面の表示切替"><button class="tab active" data-tab="jobs" aria-pressed="true" aria-controls="jobs-panel">工事</button><button class="tab" data-tab="finance" aria-pressed="false" aria-controls="finance-panel">収支</button>
+</nav>
+<section class="panel" id="jobs-panel"><div class="toolbar"><h2>工事一覧</h2><button class="btn primary" data-modal="newjob">＋ 工事登録</button></div><div class="bar"><input class="search" id="jobs-search" type="search" placeholder="工事名・施主／元請で検索" aria-label="工事検索"></div><div id="status-filters" class="filters" aria-label="表示する工事の状態"></div><p class="mobile-amount-guide">請負金額は 税抜（税込）</p><div class="cards" id="job-cards"></div>
+<table class="list-table"><thead><tr><th style="width:30%">工事名</th><th style="width:17%">施主・元請</th><th style="width:22%">工期</th><th class="right" style="width:20%">請負金額 <span class="amount-guide">税抜（税込）</span></th><th style="width:11%">状態</th></tr></thead><tbody id="jobs-tbody"></tbody>
+</table><div class="summary-note" id="job-count"></div>
+</section>
+<section class="panel hidden" id="finance-panel">
+  <div class="toolbar"><h2>収支</h2></div>
+  <nav class="finance-nav" aria-label="収支の画面">
+    <button class="btn ledger-button" data-finance="収支台帳">収支台帳</button>
+    <button class="btn ledger-button expense-button" data-finance="支出台帳">支出台帳</button>
+    <button class="btn" data-finance="入金一覧">入金一覧</button>
+    <button class="btn" data-finance="支払一覧">支払一覧</button>
+  </nav>
+  <div id="finance-preview">
+    <h3 id="finance-heading"></h3>
+    <p class="muted">この画面は準備中です。</p>
+  </div>
+  <section class="hidden" id="payments-panel" aria-labelledby="payments-heading"><div class="toolbar"><h3 id="payments-heading">支払一覧（試作）</h3><select style="max-width:230px" id="pay-sort" aria-label="支払一覧の並び順"><option value="due">支払予定日順</option><option value="vendor">支払先名順</option><option value="budget">実行予算の高い順</option><option value="blank">支払額未入力を先に</option></select></div><div class="bar"><input class="search" id="pay-search" placeholder="業者名・工事名で検索" aria-label="支払い検索"></div><div class="cards" id="pay-cards"></div>
+<table class="list-table"><thead><tr><th>支払先</th><th>工事名</th><th>支払予定日</th><th class="right">実行予算</th><th class="right">支払額</th><th>支払</th></tr></thead><tbody id="pay-tbody"></tbody>
+</table><div class="summary-note" id="pay-count"></div>
+</section>
+</section>
+<p class="home-prototype-note">画面の試作です。表示内容はサンプルです。</p>
+</main><div class="modalwrap" id="modalwrap" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal"><h3 id="modal-title"></h3><div id="modal-content"></div><div class="modalfooter"><button class="btn" id="modal-close">閉じる</button><button class="btn primary hidden" id="modal-confirm">登録</button></div></div></div><div id="toast" role="status"></div>
+<script src="cash-ledger.js"></script><script src="cloud-page-loader.js" data-controller="app.js"></script>
+</body>
+</html>
