@@ -4,7 +4,7 @@
 <script src="member-store.js"></script><script src="access-policy.js"></script><script src="access-runtime.js"></script></head>
 <body data-page="index">
 <main class="shell">
-<header class="header"><div class="brand"><span>売上進捗管理システム</span></div><div class="header-right"><button class="btn ghost" data-modal="settings">設定</button></div>
+<header class="header"><div class="brand"><span>売上進捗管理システム</span><span id="section-screen-name" style="font-size:13px;font-weight:400;margin-left:12px;color:#61798b">工事一覧</span></div><div class="header-right"><button class="btn ghost" data-modal="settings">設定</button></div>
 </header>
 <a href="home.html" class="home-return">ホームへ</a>
 <nav class="tabs" aria-label="業務画面の表示切替" hidden style="display:none"><button class="tab active" data-tab="jobs" aria-pressed="true" aria-controls="jobs-panel">工事</button><button class="tab" data-tab="finance" aria-pressed="false" aria-controls="finance-panel">収支</button>
@@ -23,7 +23,7 @@
   </nav>
   <div id="finance-preview">
     <h3 id="finance-heading" hidden style="display:none"></h3>
-    <p class="muted">表示する台帳・一覧を選んでください。</p>
+    <p class="muted">収支台帳・支出台帳・入金一覧・支払一覧を開けます。</p>
   </div>
   <section class="hidden" id="payments-panel" aria-labelledby="payments-heading"><div class="toolbar"><h3 id="payments-heading">支払一覧（試作）</h3><select style="max-width:230px" id="pay-sort" aria-label="支払一覧の並び順"><option value="due">支払予定日順</option><option value="vendor">支払先名順</option><option value="budget">実行予算の高い順</option><option value="blank">支払額未入力を先に</option></select></div><div class="bar"><input class="search" id="pay-search" placeholder="業者名・工事名で検索" aria-label="支払い検索"></div><div class="cards" id="pay-cards"></div>
 <table class="list-table"><thead><tr><th>支払先</th><th>工事名</th><th>支払予定日</th><th class="right">実行予算</th><th class="right">支払額</th><th>支払</th></tr></thead><tbody id="pay-tbody"></tbody>
@@ -32,6 +32,6 @@
 </section>
 
 </main><div class="modalwrap" id="modalwrap" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal"><h3 id="modal-title"></h3><div id="modal-content"></div><div class="modalfooter"><button class="btn" id="modal-close">閉じる</button><button class="btn primary hidden" id="modal-confirm">登録</button></div></div></div><div id="toast" role="status"></div>
-<script src="cash-ledger.js"></script><script src="cloud-page-loader.js" data-controller="app.js"></script>
+<script src="cash-ledger.js"></script><script src="cloud-page-loader.js" data-controller="app.js?v=20261125-finance2"></script>
 </body>
 </html>

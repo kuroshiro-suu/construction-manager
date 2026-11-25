@@ -134,7 +134,7 @@ el('pay-cards').innerHTML=list.map(p=>{const j=db.jobs.find(j=>j.id===p.job);ret
   const financeButtons = document.querySelectorAll('[data-finance]');
   function showFinance(name) {
     const payments = name === '支払一覧';
-    financeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.finance === name)));
+    financeButtons.forEach(button => button.removeAttribute('aria-pressed'));
     el('finance-preview').classList.toggle('hidden', payments);
     el('payments-panel').classList.toggle('hidden', !payments);
     el('finance-heading').textContent = name;
@@ -163,8 +163,9 @@ el('pay-cards').innerHTML=list.map(p=>{const j=db.jobs.find(j=>j.id===p.job);ret
   document.querySelector('[data-modal="settings"]').addEventListener('click', () => { location.href=window.jobHrefFor('settings.html'); });
 
   display();
-  showFinance('収支台帳');
+  showFinance('');
   const entryView = new URLSearchParams(location.search).get('view');
+  const screenName=entryView==='finance'?'収支':'工事一覧';const screenLabel=document.getElementById('section-screen-name');if(screenLabel)screenLabel.textContent=screenName;document.title=screenName+'｜売上進捗管理システム';
   if (entryView === 'finance') document.querySelector('[data-tab="finance"]').click();
   if (entryView === 'settings') {
     location.replace('settings.html');
