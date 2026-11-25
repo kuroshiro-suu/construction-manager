@@ -7,7 +7,7 @@
 <header class="header"><div class="brand"><span>売上進捗管理システム</span></div><div class="header-right"><button class="btn ghost" data-modal="settings">設定</button></div>
 </header>
 <a href="home.html" class="home-return">ホームへ</a>
-<nav class="tabs" aria-label="業務画面の表示切替"><button class="tab active" data-tab="jobs" aria-pressed="true" aria-controls="jobs-panel">工事</button><button class="tab" data-tab="finance" aria-pressed="false" aria-controls="finance-panel">収支</button>
+<nav class="tabs" aria-label="業務画面の表示切替" hidden style="display:none"><button class="tab active" data-tab="jobs" aria-pressed="true" aria-controls="jobs-panel">工事</button><button class="tab" data-tab="finance" aria-pressed="false" aria-controls="finance-panel">収支</button>
 </nav>
 <section class="panel" id="jobs-panel"><div class="toolbar"><h2>工事一覧</h2><button class="btn primary" data-modal="newjob">＋ 工事登録</button></div><div class="bar"><input class="search" id="jobs-search" type="search" placeholder="工事名・施主／元請で検索" aria-label="工事検索"></div><div id="status-filters" class="filters" aria-label="表示する工事の状態"></div><p class="mobile-amount-guide">請負金額は 税抜（税込）</p><div class="cards" id="job-cards"></div>
 <table class="list-table"><thead><tr><th style="width:30%">工事名</th><th style="width:17%">施主・元請</th><th style="width:22%">工期</th><th class="right" style="width:20%">請負金額 <span class="amount-guide">税抜（税込）</span></th><th style="width:11%">状態</th></tr></thead><tbody id="jobs-tbody"></tbody>

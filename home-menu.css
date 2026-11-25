@@ -17,3 +17,5 @@
   .settings-entry { width: fit-content; min-height: 44px; margin-top: 14px; padding: 8px 14px; gap: 7px; font-size: 15px; }
   .settings-entry svg { width: 20px; height: 20px; }
 }
+
+.company-switch{font-size:13px;margin-left:20px;color:#2e5f87;white-space:nowrap}

@@ -131,3 +131,7 @@ body[data-page="construction"] .document-fields textarea{font-size:14px}
 /* テキスト欄の高さ・内側余白をチェック欄に適用しない。 */
 body[data-page="construction"] input[type="checkbox"]{min-height:0;padding:0}
 #guest-permission-list{margin-top:8px}
+
+body[data-page="construction"] .progress-action{min-width:108px;width:max-content;white-space:nowrap;display:block;padding:6px 16px}.section-subtitle{font-size:12px;font-weight:400;color:#647586;margin-left:12px;display:inline-block}
+
+.job-danger-actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.job-danger-actions .danger{color:#a83e35;border-color:#cda6a1}.job-danger-actions{order:2}
