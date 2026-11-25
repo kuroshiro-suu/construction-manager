@@ -37,3 +37,5 @@ button:focus-visible,input:focus-visible { outline: 2px solid #2e5f87; outline-o
   .prototype-note { text-align: left; }
 }
 @media(max-width:350px) { .login-card { padding-inline: 18px; } .brand { font-size: 16px; } }
+
+.brand .screen-name{font-size:13px;font-weight:400;color:#61798b;border-left:1px solid #bac9d4;padding-left:12px;white-space:nowrap}
