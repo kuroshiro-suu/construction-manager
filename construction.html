@@ -3,7 +3,7 @@
 <head><script src="deployment-config.js"></script><script src="deployment-bootstrap.js"></script><script src="beta-config.js"></script><script src="beta-gate.js"></script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>工事情報｜売上進捗管理システム</title>
-<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="construction.css">
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="construction.css?v=20261125-actions1">
 <link rel="stylesheet" href="documents-ui.css"><script src="member-store.js"></script><script src="access-policy.js"></script><script src="access-runtime.js"></script></head>
 <body data-page="construction">
 <main class="shell">
@@ -47,7 +47,7 @@
 <section class="detail-actions" aria-label="工事に関する操作">
 <div class="mainbuttons"><button data-action="estimate">見積作成</button><button data-action="cash">入金・支払</button><button data-action="documents">帳票出力</button></div>
 <button class="history" data-action="history"><span><b>帳票出力状況</b><span class="history-summary muted" id="history-summary"></span></span><span class="history-detail">詳細</span></button>
-<div class="bottomtools"><div class="secondary-actions"><button class="btn ghost" data-action="branch">＋ 追加工事</button><a class="btn ghost" id="memorandum-link" href="memorandum.html">汎用覚書</a></div><button class="btn primary" id="save-job">更新</button></div><div class="job-danger-actions"><button type="button" class="btn ghost" id="lost-job">不調にする</button><button type="button" class="btn ghost danger" id="delete-job">工事削除</button></div>
+<div class="bottomtools"><div class="secondary-actions"><button class="btn ghost" data-action="branch">＋ 追加工事</button><a class="btn ghost" id="memorandum-link" href="memorandum.html">汎用覚書</a><button type="button" class="btn ghost" id="lost-job">不調にする</button><button type="button" class="btn ghost danger" id="delete-job">工事削除</button></div><button class="btn primary" id="save-job">更新</button></div>
 </section>
 </section>
 <p class="prototype-note">画面の試作です。金額はサンプル、保存先はこのブラウザ内です。</p>
