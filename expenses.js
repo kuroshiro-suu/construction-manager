@@ -4,7 +4,7 @@
 const el=id=>document.getElementById(id),keys=['date','content','amount','category','method','note'];
 const labels={date:'日付',content:'内容',amount:'金額',category:'種別',method:'支払方法',note:'メモ'};
 let businessType='';try{businessType=JSON.parse(window.appStorage.getItem('construction_business_v1')||'{}').businessType||'';}catch{}const categories=window.expenseOptions.categories(businessType);
-el('business-type-notice').textContent=categories.length?'':'種別を選ぶには、設定 → 事業者情報で個人・法人を選択してください。既存の支出はそのまま残ります。';
+el('business-type-notice').hidden=categories.length>0;el('business-type-notice').textContent=categories.length?'':'種別を選ぶには、設定 → 事業者情報で個人・法人を選択してください。既存の支出はそのまま残ります。';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const blank=()=>({date:'',content:'',amount:'',category:'',method:'',note:''});
 const yen=n=>Number(n).toLocaleString('ja-JP')+'円';
@@ -29,15 +29,17 @@ function open(modeValue){
  el('page-title').textContent=mode==='new'?'支出の新規登録':'支出の編集';
  el('entry-hint').textContent=mode==='new'?'領収書を見ながら、続けて入力してください。日付は順不同で大丈夫です。':'登録済みの支出だけを表示しています。まとめて修正できます。';
  el('register').textContent=mode==='new'?'まとめて登録':'変更を反映';
- el('add-tools').hidden=mode!=='new';el('ledger-view').hidden=true;el('entry-view').hidden=false;renderDraft();status('');
+ el('entry-hint').hidden=false;el('expense-page-description').textContent=mode==='new'?'新しい支出を入力する画面です。まとめて登録すると支出台帳の一覧に反映されます。':'登録済みの支出を入力・修正する画面です。変更を反映すると支出台帳の一覧に反映されます。';el('add-tools').hidden=mode!=='new';el('ledger-view').hidden=true;el('entry-view').hidden=false;renderDraft();status('');
 }
 function back(message='',keepDraft=true){
  if(mode==='new')newDraft=draft; else if(keepDraft)editDraft=draft;
- el('entry-view').hidden=true;el('ledger-view').hidden=false;el('page-title').textContent='支出台帳';renderLedger();status(message);
+ el('entry-hint').hidden=true;el('expense-page-description').textContent='登録済みの支出を日付順に確認する画面です。新しい支出は「新規登録」、登録済みの内容は「内容を編集」から入力・修正できます。';el('entry-view').hidden=true;el('ledger-view').hidden=false;el('page-title').textContent='支出台帳';renderLedger();status(message);
 }
+document.addEventListener('app-parent-back',event=>{if(!el('entry-view').hidden){event.preventDefault();returnToLedger();}});
 function remember(value){history.push(structuredClone(value));if(history.length>1)history.shift();el('undo').disabled=false;}
 el('new-entry').addEventListener('click',()=>open('new'));el('edit-entry').addEventListener('click',()=>open('edit'));
-el('back-ledger').addEventListener('click',()=>back(mode==='new'&&draft.some(filled)?'入力途中の内容は、このページを開いている間、新規登録画面に残しています。':mode==='edit'?'編集途中の内容は、このページを開いている間、編集画面に残しています。':'台帳へ戻りました。'));
+function returnToLedger(){back(mode==='new'&&draft.some(filled)?'入力途中の内容は、このページを開いている間、新規登録画面に残しています。':mode==='edit'?'編集途中の内容は、このページを開いている間、編集画面に残しています。':'台帳へ戻りました。');}
+el('back-ledger').addEventListener('click',returnToLedger);
 function add(count){remember(draft);draft.push(...Array.from({length:count},blank));renderDraft();status(count+'行追加しました。');}
 el('add-one').addEventListener('click',()=>add(1));el('add-ten').addEventListener('click',()=>add(10));
 el('entry-rows').addEventListener('focusin',event=>{if(event.target.matches('input,select'))before=structuredClone(draft);});
