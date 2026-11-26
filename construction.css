@@ -126,7 +126,7 @@ body[data-page="construction"] input:not([type="radio"]):not([type="checkbox"]),
 body[data-page="construction"] select,
 body[data-page="construction"] .document-fields textarea{font-size:14px}
 
-.progress-dates input:disabled{background:#e7eaee;color:#596575;opacity:1;cursor:default}.progress-action{margin-top:5px;padding:5px 10px;font-size:12px}.progress-checks{padding-left:18px;font-size:13px;line-height:1.7}.progress-checks .ok{color:#3e6557}.progress-checks .missing,#transition-error{color:#ad492c}.progress-date{margin-top:16px}.modal{max-height:85vh;overflow:auto}
+.progress-dates input:disabled{background:#e7eaee;color:#596575;opacity:1;cursor:default}.progress-action{margin-top:5px;padding:5px 10px;font-size:12px}.progress-checks{list-style:none;padding-left:0;font-size:13px;line-height:1.7}.progress-checks .ok{color:#3e6557}.progress-checks .missing,#transition-error{color:#ad492c}.progress-date{margin-top:16px}.modal{max-height:85vh;overflow:auto}
 
 /* テキスト欄の高さ・内側余白をチェック欄に適用しない。 */
 body[data-page="construction"] input[type="checkbox"]{min-height:0;padding:0}
