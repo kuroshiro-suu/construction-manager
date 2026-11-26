@@ -5,8 +5,8 @@ const el=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g
 const yen=n=>Number(n).toLocaleString('ja-JP')+'円',formatDate=v=>v.replaceAll('-','/');
 const labels={income:'入金',payment:'工事支払',expense:'会社支出'};
 let transactions=[];
-function sourceData(){const db=JSON.parse(window.appStorage.getItem('construction_demo_v02')||'null')||{jobs:[],payments:[]};if(db.jobs===undefined&&db.payments===undefined){db.jobs=[];db.payments=[];}const expenses=window.cashLedger.expenseRows(window.appStorage.getItem(window.cashLedger.EXPENSE_KEY));return window.cashLedger.collect(db,expenses);}
-const badge=r=>`<span class="kind-badge ${r.kind}">${labels[r.kind]}</span>`;
+function sourceData(){const db=JSON.parse(window.appStorage.getItem('construction_demo_v02')||'null')||{jobs:[],payments:[]};if(db.jobs===undefined&&db.payments===undefined){db.jobs=[];db.payments=[];}const expenses=window.cashLedger.expenseRows(window.appStorage.getItem(window.cashLedger.EXPENSE_KEY));return window.cashLedger.collect(db,expenses,window.otherIncome.rows(window.appStorage.getItem(window.otherIncome.KEY)));}
+const badge=r=>`<span class="kind-badge ${r.kind}">${r.source==='other-income'?'その他入金':labels[r.kind]}</span>`;
 const jobLink=r=>r.job?`<a class="job-name" href="construction.html?id=${encodeURIComponent(r.job)}">${esc(r.jobName)}</a>`:esc(r.jobName||'—');
 let period='current',fiscalMonth=null;
 try { const settings=JSON.parse(window.appStorage.getItem('construction_demo_v02')||'{}'); const month=Number(settings.fiscalEndMonth); if(Number.isInteger(month)&&month>=1&&month<=12)fiscalMonth=month; } catch(e) {}

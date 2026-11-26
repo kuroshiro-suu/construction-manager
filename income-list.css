@@ -12,3 +12,5 @@
   .table-wrap th:nth-child(3),.table-wrap td:nth-child(3) { padding-right:24px; }
   .table-wrap th:nth-child(4),.table-wrap td:nth-child(4) { padding-left:20px; border-left:1px solid #dbe3ea; }
 }
+
+.other-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.other-grid-wrap{overflow:auto}.other-grid{width:100%;min-width:700px}.other-grid input,.other-grid select{box-sizing:border-box;width:100%;min-width:0;padding:8px}.other-grid th{white-space:nowrap}#other-editor{border:1px solid #bac9d7;padding:16px;margin:12px 0}#other-editor[hidden]{display:none}@media(max-width:600px){.other-grid{min-width:0}.other-grid thead{display:none}.other-grid tr{display:block;border-bottom:1px solid #bac9d7;padding:10px}.other-grid td{display:block}.other-grid td[data-label]::before{content:attr(data-label);display:block;font-size:12px}}

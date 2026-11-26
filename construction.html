@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="ja">
-<head><script src="deployment-config.js"></script><script src="deployment-bootstrap.js"></script><script src="beta-config.js"></script><script src="beta-gate.js"></script>
+<head><script src="deployment-config.js"></script><script src="deployment-bootstrap.js"></script><script src="beta-config.js?v=20261126-1"></script><script src="beta-gate.js?v=20261126-1"></script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>工事情報｜売上進捗管理システム</title>
-<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="construction.css?v=20261125-actions1">
-<link rel="stylesheet" href="documents-ui.css"><script src="member-store.js"></script><script src="access-policy.js"></script><script src="access-runtime.js"></script></head>
+<link rel="stylesheet" href="style.css?v=20261126-1"><link rel="stylesheet" href="construction.css?v=20261126-1">
+<link rel="stylesheet" href="documents-ui.css?v=20261126-1"><script src="member-store.js?v=20261126-1"></script><script src="access-policy.js?v=20261126-1"></script><script src="access-runtime.js?v=20261126-1"></script><script src="money-input.js?v=20261126-1"></script></head>
 <body data-page="construction">
 <main class="shell">
 <header class="header"><div class="brand">売上進捗管理システム</div><nav aria-label="工事情報の移動" style="display:flex;align-items:center;gap:16px;flex-wrap:wrap"><a class="back-to-list" href="home.html">ホームへ</a><a class="back-to-list" href="index.html">工事一覧へ</a></nav></header>
@@ -30,7 +30,7 @@
 <section class="detail-section" aria-labelledby="dates-heading">
 <h2 id="dates-heading">工期・進捗</h2>
 <div class="field"><label>予定工期</label><div class="period"><input type="date" id="period-start" aria-label="予定工期の着工日"><span>〜</span><input type="date" id="period-end" aria-label="予定工期の完工日"></div></div>
-<div class="field"><label>実績工期</label><div class="period"><input type="date" id="actual-start" aria-label="実績工期の着工日"><span>〜</span><input type="date" id="actual-end" aria-label="実績工期の完工日"></div></div><div class="progress-dates"><div class="field"><label for="order-date">受注日</label><input type="date" id="order-date" disabled><button type="button" class="progress-action" id="order-action">受注する</button></div><div class="field"><label for="completion-date">完工日</label><input type="date" id="completion-date"></div><div class="field"><label for="posting-date">計上日</label><input type="date" id="posting-date" disabled><button type="button" class="progress-action" id="posting-action">計上する</button></div></div>
+<div class="field"><label>実績工期</label><div class="period"><input type="date" id="actual-start" aria-label="実績工期の着工日"><span>〜</span><input type="date" id="actual-end" aria-label="実績工期の完工日"></div></div><div class="progress-dates"><div class="field"><label for="order-date">受注日</label><input type="date" id="order-date" disabled><button type="button" class="progress-action" id="order-action">受注する</button></div><div class="field"><label for="completion-date">完工日</label><input type="date" id="completion-date" disabled><button type="button" class="progress-action" id="completion-action">完工する</button></div><div class="field"><label for="posting-date">計上日</label><input type="date" id="posting-date" disabled><button type="button" class="progress-action" id="posting-action">計上する</button></div></div>
 <p class="sectionhint">予定工期は発注書・請書、実績工期は請求書に使用します。完工日は完成引渡日として使用します。</p>
 <div id="posting-alert" class="notice hidden"></div>
 </section>
@@ -53,6 +53,6 @@
 <p class="prototype-note">画面の試作です。金額はサンプル、保存先はこのブラウザ内です。</p>
 </main>
 <div class="modalwrap" id="modalwrap" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal"><h3 id="modal-title"></h3><div id="modal-content"></div><div class="modalfooter"><button class="btn" id="modal-close">閉じる</button><button class="btn primary hidden" id="modal-confirm">登録</button></div></div></div><div id="toast" role="status"></div>
-<script src="guest-permissions.js"></script><script src="documents-ui.js"></script><script src="cash-ledger.js"></script><script src="cash-store.js"></script><script src="progress-model.js"></script><script src="job-actions.js"></script><script src="cloud-page-loader.js" data-controller="app.js"></script>
-<script src="editable-options.js"></script></body>
+<script src="guest-permissions.js?v=20261126-1"></script><script src="documents-ui.js?v=20261126-1"></script><script src="cash-ledger.js?v=20261126-1"></script><script src="cash-store.js?v=20261126-1"></script><script src="progress-model.js?v=20261126-1"></script><script src="job-actions.js?v=20261126-1"></script><script src="cloud-page-loader.js?v=20261126-1" data-controller="app.js?v=20261126-1"></script>
+<script src="editable-options.js?v=20261126-1"></script></body>
 </html>
