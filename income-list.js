@@ -23,4 +23,5 @@ for(const id of ['search','month'])el(id).addEventListener('input',render);
 for(const id of ['state','sort'])el(id).addEventListener('change',render);
 el('reset').addEventListener('click',()=>{el('search').value='';el('month').value='';el('state').value='all';el('sort').value='due';render();});
 window.addEventListener('other-income-saved',render);window.addEventListener('focus',render);window.addEventListener('storage',e=>{if(e.key==='construction_demo_v02')render();});render();
+window.incomeListReady=true;window.dispatchEvent(new Event('income-list-ready'));
 })();
