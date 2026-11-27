@@ -8,7 +8,7 @@
 <label>屋号<span class="optional">任意</span><input name="tradeName" placeholder="例：岡山住設"></label><div><div class="pair"><label>肩書<input name="representativeTitle" placeholder="例：代表・代表取締役・社長"></label><label>代表者名<input name="representative" placeholder="例：岡山 太郎"></label></div><label class="print-check"><input type="checkbox" name="printRepresentative">肩書・代表者名を見積書・請求書に載せる</label></div>
 <label>郵便番号<input class="postal" name="postalCode" autocomplete="postal-code" placeholder="例：700-0000"></label>
 <label>所在地<input name="address" autocomplete="street-address" placeholder="都道府県・市区町村・番地・建物名"></label>
-<div class="pair"><label>電話番号<input name="phone" type="tel" autocomplete="tel" placeholder="例：086-000-0000"></label><label>FAX<span class="optional">任意</span><input name="fax" type="tel" placeholder="例：086-000-0001"></label></div>
+<div class="pair"><label>電話番号<input name="phone" type="text" inputmode="text" autocomplete="tel" placeholder="例：086-332-3333"></label><label>FAX<span class="optional">任意</span><input name="fax" type="text" inputmode="text" placeholder="例：086-000-0001"></label></div><p class="help">電話番号・FAXは、ハイフン付きで入力できます（例：086-332-3333）。入力した表記のまま帳票に載ります。</p>
 <label>メールアドレス<input name="email" type="email" autocomplete="email" placeholder="例：info@example.com"></label>
 </div></section></div><div>
 <section class="panel"><h2>インボイス登録番号</h2><label class="sr-label" for="invoice-number">登録番号</label><input id="invoice-number" name="invoiceNumber" placeholder="T0000000000000" pattern="T[0-9]{13}" maxlength="14" title="半角のTに続けて、数字13桁を入力してください。" spellcheck="false"><p class="help">T＋数字13桁。登録していない場合は空欄で構いません。</p></section>
