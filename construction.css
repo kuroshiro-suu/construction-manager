@@ -137,3 +137,5 @@ body[data-page="construction"] .progress-action{min-width:108px;width:max-conten
 .job-danger-actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.bottomtools .danger{color:#a83e35;border-color:#cda6a1}.job-danger-actions{order:2}
 
 @media(min-width:751px){body[data-page="construction"] .bottomtools{flex-wrap:nowrap;overflow-x:auto}.bottomtools .secondary-actions{flex-wrap:nowrap;min-width:max-content}.bottomtools .btn{white-space:nowrap;flex-shrink:0}}
+
+.progress-buttons{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.progress-buttons .progress-action{margin-top:5px}.progress-clear{margin-top:5px;padding:5px 8px;font-size:12px;min-width:0;white-space:nowrap}.progress-clear:disabled{opacity:.45;cursor:default}
