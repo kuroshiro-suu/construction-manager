@@ -2,7 +2,7 @@
 (()=>{'use strict';
 function arrange(){const banner=document.querySelector('.cloud-save-banner');if(!banner||!banner.textContent.startsWith('保存先：'))return false;
  observer.disconnect();document.body.classList.add('workspace-compact');
- const brand=document.createElement('strong');brand.className='workspace-app-name';brand.innerHTML="<span class=\"yui-brand\" aria-label=\"Yui-Pad 工事・収支管理システム\"><img src=\"yui-mark.svg?v=20261128-yui1\" width=\"26\" height=\"26\" alt=\"\"><strong>Yui-Pad</strong><span class=\"yui-descriptor\">工事・収支管理システム</span></span>";banner.prepend(brand);
+ const brand=document.createElement('strong');brand.className='workspace-app-name';brand.innerHTML="<span class=\"yui-brand\" aria-label=\"Yui-Pad 工事・収支管理システム\"><img src=\"yui-mark.svg?v=20261128-yui2\" width=\"26\" height=\"26\" alt=\"\"><strong>Yui-Pad</strong><span class=\"yui-descriptor\">工事・収支管理システム</span></span>";banner.prepend(brand);
  const header=document.querySelector('body>header,main>header,.shell>header');
  if(header){for(const n of header.querySelectorAll('.brand, :scope>span')){if(n.textContent.includes('Yui-Pad')){const screen=n.querySelector('#section-screen-name');if(screen){header.prepend(screen);screen.classList.add('workspace-title');}n.classList.add('workspace-old-brand');}}
  if(header.classList.contains('brand'))header.classList.add('workspace-home-header');
