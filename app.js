@@ -93,7 +93,7 @@ function topPage() {
 
   function display() {
     const query = el('jobs-search').value.trim().toLowerCase();
-    const jobs = db.jobs.map(job => ({job, state: status(job)})).filter(({job, state}) =>
+    const jobs = db.jobs.slice().sort((a,b)=>window.listOrder.jobs(a,b,window.cloudRuntime?.jobNumbers||{})).map(job => ({job, state: status(job)})).filter(({job, state}) =>
       on.includes(state) && [job.name, job.client, job.id].join(' ').toLowerCase().includes(query));
     el('jobs-tbody').innerHTML = jobs.map(({job, state}) => `
       <tr>

@@ -16,7 +16,7 @@ function status(message){el('status').textContent=message;}
 function sum(rows){return rows.reduce((n,row)=>n+(Number(row.amount)||0),0);}
 function renderLedger(){
  const query=el('search').value.trim().toLowerCase(),month=el('month').value;
- const rows=ledger.filter(row=>(!month||row.date.startsWith(month))&&(!query||(row.content+' '+(row.category||'')+' '+(row.method||'')+' '+row.note).toLowerCase().includes(query))).sort((a,b)=>b.date.localeCompare(a.date));
+ const rows=ledger.map((r,index)=>({...r,_order:index})).filter(row=>(!month||row.date.startsWith(month))&&(!query||(row.content+' '+(row.category||'')+' '+(row.method||'')+' '+row.note).toLowerCase().includes(query))).sort((a,b)=>window.listOrder.newest({...a,sortDate:a.date},{...b,sortDate:b.date}));
  el('ledger-rows').innerHTML=rows.map(row=>`<tr><td data-label="日付">${esc(row.date.replaceAll('-','/'))}</td><td data-label="内容">${esc(row.content)}</td><td data-label="金額" class="amount">${yen(row.amount)}</td><td data-label="種別">${esc(row.category||'—')}</td><td data-label="支払方法">${esc(row.method||'—')}</td><td data-label="メモ">${esc(row.note)}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">該当する支出はありません。</td></tr>';
  el('ledger-total').textContent=yen(sum(rows));el('list-count').textContent=`${rows.length}件表示 ／ 登録${ledger.length}件`;
 }
@@ -53,7 +53,7 @@ el('register').addEventListener('click',async()=>{
  if(errors.length){errors.forEach(i=>el('entry-rows').children[i].classList.add('invalid'));status(`${errors.map(i=>i+1).join('・')}行目の日付・内容・金額を確認してください。「その他」はメモも必要です。入力途中の行はそのまま残しています。`);return;}
  if(mode==='new'){
   const entries=draft.filter(filled);if(!entries.length){status('入力した支出はまだありません。');return;}
-  try{await saveLedger([...ledger,...entries.map(row=>({...row,id:nextId++}))]);}catch(err){status(err.message);return;}newDraft=Array.from({length:5},blank);draft=newDraft;back(`${entries.length}件を保存しました。収支台帳へ反映します。`);
+  try{await saveLedger([...ledger,...entries.map(row=>({...row,id:nextId++,createdAt:new Date().toISOString()}))]);}catch(err){status(err.message);return;}newDraft=Array.from({length:5},blank);draft=newDraft;back(`${entries.length}件を保存しました。収支台帳へ反映します。`);
  }else{try{await saveLedger(structuredClone(draft));}catch(err){status(err.message);return;}editDraft=null;back('支出の変更を保存しました。収支台帳へ反映します。',false);}
 });
 el('search').addEventListener('input',renderLedger);el('month').addEventListener('input',renderLedger);el('clear-filter').addEventListener('click',()=>{el('search').value='';el('month').value='';renderLedger();});

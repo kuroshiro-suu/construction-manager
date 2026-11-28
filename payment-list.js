@@ -18,14 +18,14 @@ function render(){
 
  el('outstanding-total').textContent=yen(rows.filter(isUnpaid).reduce((n,r)=>n+(r.remaining??r.budget),0));
  const q=el('search').value.trim().toLowerCase(),month=el('month').value,state=el('state').value,sort=el('sort').value;
- const shown=rows.filter(r=>(!q||(r.vendor+' '+r.name+' '+r.note).toLowerCase().includes(q))&&(!month||r.due.startsWith(month))&&(state==='all'||state==='paid'&&r.settled&&!noPaymentNeeded(r)||state==='unpaid'&&isUnpaid(r)||state==='pending'&&isPending(r)||state==='none'&&noPaymentNeeded(r))).slice();
- shown.sort((a,b)=>sort==='vendor'?a.vendor.localeCompare(b.vendor,'ja'):sort==='amount'?amount(b)-amount(a):(a.due||'9999').localeCompare(b.due||'9999'));
+ const shown=rows.map((r,index)=>({...r,_order:index,jobNumber:window.cloudRuntime?.jobNumbers?.[r.job]||r.job||''})).filter(r=>(!q||(r.vendor+' '+r.name+' '+r.note).toLowerCase().includes(q))&&(!month||r.due.startsWith(month))&&(state==='all'||state==='paid'&&r.settled&&!noPaymentNeeded(r)||state==='unpaid'&&isUnpaid(r)||state==='pending'&&isPending(r)||state==='none'&&noPaymentNeeded(r))).slice();
+ shown.sort((a,b)=>sort==='new'?window.listOrder.newest({...a,sortDate:a.actual||a.due||''},{...b,sortDate:b.actual||b.due||''}):sort==='vendor'?a.vendor.localeCompare(b.vendor,'ja'):sort==='amount'?amount(b)-amount(a):(a.due||'9999').localeCompare(b.due||'9999'));
  el('payment-rows').innerHTML=shown.map(r=>`<tr><td><strong>${esc(r.vendor)}</strong></td><td>${jobLink(r)}</td><td class="money budget-value">${yen(r.budget)}</td><td class="money">${amountText(r)}</td><td class="date">${date(r.due)}</td><td class="date">${r.actual?date(r.actual):'—'}</td><td>${badge(r)}</td><td>${esc(r.note||'—')}</td></tr>`).join('')||'<tr><td colspan="8" class="empty">該当する支払はありません。</td></tr>';
  el('payment-cards').innerHTML=shown.map(r=>`<article><div class="card-top"><h2 class="vendor-name">${esc(r.vendor)}</h2>${badge(r)}</div><div class="payment-job">${jobLink(r)}</div><div class="payment-amounts"><div><span class="amount-label">実行予算額（税込）</span><div class="budget-value">${yen(r.budget)}</div></div><div><span class="amount-label">支払額（税込）</span><div class="card-amount">${amountText(r)}</div></div></div><dl><div><dt>支払予定日</dt><dd>${date(r.due)}</dd></div><div><dt>実績支払日</dt><dd>${r.actual?date(r.actual):'—'}</dd></div></dl>${r.note?`<p class="payment-memo">${esc(r.note)}</p>`:''}</article>`).join('')||'<p class="empty">該当する支払はありません。</p>';
  el('count').textContent=`${shown.length}件表示 ／ 全${rows.length}件`;
 }
 for(const id of ['search','month'])el(id).addEventListener('input',render);
 for(const id of ['state','sort'])el(id).addEventListener('change',render);
-el('reset').addEventListener('click',()=>{el('search').value='';el('month').value='';el('state').value='all';el('sort').value='due';render();});
+el('reset').addEventListener('click',()=>{el('search').value='';el('month').value='';el('state').value='all';el('sort').value='new';render();});
 window.addEventListener('focus',render);window.addEventListener('storage',e=>{if(e.key==='construction_demo_v02')render();});render();
 })();

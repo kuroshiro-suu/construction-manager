@@ -27,8 +27,8 @@ function render(){try{transactions=sourceData();el('report').disabled=false;}cat
  el('fiscal-notice').hidden=!needsFiscal;
  for(const name of ['current','month','all'])el('period-'+name).setAttribute('aria-pressed',String(period===name));
  el('period-label').textContent=needsFiscal?'決算月未設定':start||end?`${start?formatDate(start):'指定なし'} 〜 ${end?formatDate(end):'指定なし'}`:'全期間';
- const shown=transactions.filter(r=>!needsFiscal&&(!query||(r.description+' '+r.party+' '+(r.jobName||'')).toLowerCase().includes(query))&&(!start||r.actual>=start)&&(!end||r.actual<=end)&&(kind==='all'||r.kind===kind)).slice();
- shown.sort((a,b)=>el('sort').value==='new'?b.actual.localeCompare(a.actual):a.actual.localeCompare(b.actual));
+ const shown=transactions.map((r,index)=>({...r,_order:index})).filter(r=>!needsFiscal&&(!query||(r.description+' '+r.party+' '+(r.jobName||'')).toLowerCase().includes(query))&&(!start||r.actual>=start)&&(!end||r.actual<=end)&&(kind==='all'||r.kind===kind)).slice();
+ shown.sort((a,b)=>el('sort').value==='new'?window.listOrder.newest(a,b):a.actual.localeCompare(b.actual)||window.listOrder.recent(a,b));
  const incoming=shown.filter(r=>r.kind==='income').reduce((sum,r)=>sum+r.amount,0),outgoing=shown.filter(r=>r.kind!=='income').reduce((sum,r)=>sum+r.amount,0);
  el('income-total').textContent=yen(incoming);el('payment-total').textContent=yen(shown.filter(r=>r.kind==='payment').reduce((sum,r)=>sum+r.amount,0));el('expense-total').textContent=yen(shown.filter(r=>r.kind==='expense').reduce((sum,r)=>sum+r.amount,0));el('difference-total').textContent=yen(incoming-outgoing);el('difference-total').classList.toggle('negative',incoming-outgoing<0);
  el('book-rows').innerHTML=shown.map(r=>`<tr><td class="date">${formatDate(r.actual)}</td><td>${badge(r)}</td><td><span class="book-description">${esc(r.description)}</span>${r.party?`<span class="counterparty">${esc(r.party)}</span>`:''}</td><td>${jobLink(r)}</td><td class="money">${r.kind==='income'?yen(r.amount):'—'}</td><td class="money">${r.kind!=='income'?yen(r.amount):'—'}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">該当する入出金はありません。</td></tr>';
