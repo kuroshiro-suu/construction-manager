@@ -1,0 +1,68 @@
+/* 画面用の共通密度。印刷帳票と固定行高の編集グリッドには適用しない。 */
+@media screen {
+ html body :is(button,.btn):not(.setting-card):not(.lamp):not(.tab):not(.home-entry){min-height:32px;padding-top:5px;padding-bottom:5px;line-height:1.45}
+ html body input:not([type=checkbox]):not([type=radio]):not([type=file]):not([type=hidden]):not(table input),html body select:not(table select){min-height:34px;height:34px;padding-top:4px;padding-bottom:4px}
+ html body textarea:not(table textarea){padding-top:5px;padding-bottom:5px;min-height:52px}
+ html body :is(.page-heading,.page-head){margin-bottom:14px;gap:10px;flex-wrap:wrap}
+ html body :is(.intro,.lead,.summary-note,.prototype-note){line-height:1.55;margin-top:6px;margin-bottom:10px}
+ html body :is(.actions,.editor-actions,.form-actions,.other-actions,.row-tools,.card-footer){display:flex;flex-direction:row;align-items:center;gap:8px;flex-wrap:wrap}
+ html body :is(.actions,.editor-actions,.form-actions,.other-actions) > button{width:auto;flex:0 1 auto;white-space:nowrap}
+ html body .editor-actions{margin-top:14px}
+ html body :is(.panel,.unit-panel){padding-top:14px;padding-bottom:14px}
+ html body :is(.fields,.profile-grid){row-gap:10px}
+ html body :is(.panel h2,.summaries h2){margin-bottom:10px}
+ html body .settings-grid{gap:10px}
+ html body .setting-card{min-height:82px;padding:13px 18px}
+ html body .card-description{margin-top:3px}
+ html body .current-value{top:14px;right:18px}
+ html body main>section{margin-bottom:18px}
+ html body .home-entry{min-height:100px}
+ html body .settings-entry{min-height:38px;padding-top:6px;padding-bottom:6px}
+ html body .login-card{padding:22px 26px}
+ html body .login-card h1{margin-bottom:14px}
+ html body .login-card .field{margin-bottom:12px}
+ html body #auth-tabs{margin-bottom:12px!important}
+ html body #auth-tabs button{width:auto;flex:1;margin:0}
+ html body .document-choice{padding:8px 12px}
+ html body .small-window{padding:18px 20px}
+ html body .summaries>div{padding:10px 12px}
+ html body .outstanding{padding-top:10px;padding-bottom:10px}
+ html body .filters{margin-top:8px;margin-bottom:10px;row-gap:8px}
+ html body .expense-description p{margin-top:3px;margin-bottom:3px}
+ html body .expense-description{margin-bottom:10px}
+ html body .detail-section,html body .document-fields{padding-top:10px;padding-bottom:10px;margin-top:10px}
+ html body .detail-actions{margin-top:12px}
+ html body .guest-permission{margin-top:12px;margin-bottom:12px}
+ html body .guest-permission summary{padding-top:7px;padding-bottom:7px}
+ html body .mainbuttons button{min-height:36px;padding-top:6px;padding-bottom:6px}
+ html body .card-list article{padding-top:8px;padding-bottom:8px}
+ html body .work-type{min-height:34px;padding-top:5px;padding-bottom:5px}
+ html body .help-details{font-size:12px;color:#647586;margin:6px 0 10px}
+ html body .help-details summary{cursor:pointer;width:fit-content;text-decoration:underline;text-underline-offset:3px}
+ html body .help-details p{margin:5px 0}
+ html body .compact-pair{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+ html body .compact-pair>button{width:auto;flex:1 1 120px;margin:0}
+ @media(max-width:750px){
+  html body :is(button,.btn):not(.setting-card):not(.lamp):not(.tab){min-height:36px}
+  html body input:not([type=checkbox]):not([type=radio]):not([type=file]):not([type=hidden]):not(table input),html body select:not(table select){min-height:36px;height:36px;font-size:16px}
+  html body .setting-card{min-height:74px;padding:10px 14px}
+  html body .current-value{top:10px;right:14px}
+  html body .home-entry{min-height:86px}
+  html body .login-card{padding:18px 20px}
+  html body .panel{padding-top:12px;padding-bottom:12px}
+  html body .pair{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  html body .card-footer{gap:6px}
+ }
+}
+
+@media screen and (min-width:751px){html body .claim-fields input,html body .claim-fields select,html body .payment-plan input,html body .receipt-fields input{height:30px;min-height:30px;padding-top:3px;padding-bottom:3px}}
+
+@media screen{
+ html body>header,html body .app-header{padding-top:18px;padding-bottom:16px}
+ html body .header{margin-bottom:10px}
+ html body .cash-summary{gap:8px}
+ html body .cash-summary>div{padding:10px 12px}
+ html body .context{margin-bottom:12px}
+ html body :is(#status,#other-status,.status):empty{min-height:0;margin-top:0;margin-bottom:0}
+ @media(max-width:750px){html body>header,html body .app-header{padding-top:14px;padding-bottom:12px}html body .cash-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+}

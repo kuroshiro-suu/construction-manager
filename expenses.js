@@ -27,9 +27,9 @@ function renderDraft(){
 function open(modeValue){
  mode=modeValue;draft=mode==='new'?newDraft:(editDraft??structuredClone(ledger));history=[];before=null;
  el('page-title').textContent=mode==='new'?'支出の新規登録':'支出の編集';
- el('entry-hint').textContent=mode==='new'?'領収書を見ながら、続けて入力してください。日付は順不同で大丈夫です。':'登録済みの支出だけを表示しています。まとめて修正できます。';
+ el('entry-hint').textContent=mode==='new'?'領収書を見ながら、続けて入力してください。日付は順不同で大丈夫です。':'登録済みの支出をまとめて修正できます。';
  el('register').textContent=mode==='new'?'まとめて登録':'変更を反映';
- el('entry-hint').hidden=false;el('expense-page-description').textContent=mode==='new'?'新しい支出を入力する画面です。まとめて登録すると支出台帳の一覧に反映されます。':'登録済みの支出を入力・修正する画面です。変更を反映すると支出台帳の一覧に反映されます。';el('add-tools').hidden=mode!=='new';el('ledger-view').hidden=true;el('entry-view').hidden=false;renderDraft();status('');
+ el('entry-hint').hidden=false;el('expense-page-description').textContent=mode==='new'?'新しい支出を入力する画面です。まとめて登録すると支出台帳の一覧に反映されます。':'変更内容は「変更を反映」で支出台帳へ保存します。';el('add-tools').hidden=mode!=='new';el('ledger-view').hidden=true;el('entry-view').hidden=false;renderDraft();status('');
 }
 function back(message='',keepDraft=true){
  if(mode==='new')newDraft=draft; else if(keepDraft)editDraft=draft;
