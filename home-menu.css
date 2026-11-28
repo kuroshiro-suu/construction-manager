@@ -20,3 +20,12 @@
 
 
 .company-select-link{display:block;width:max-content;margin:22px auto 0;padding:5px 12px;border:1px solid #bdc9d4;border-radius:4px;color:#526f85;font-size:13px;text-decoration:none}.company-select-link[hidden]{display:none!important}
+
+/* ホームの補助操作は同じ行にまとめる。 */
+.home-menu{width:min(420px,calc(100% - 48px));margin:clamp(48px,17vh,150px) auto 48px}
+.home-entries{gap:16px}
+.home-secondary{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:14px}
+.home-secondary .settings-entry,.home-secondary .company-select-link{display:inline-flex;align-items:center;justify-content:center;width:auto;min-height:38px;margin:0;padding:6px 12px;white-space:nowrap}
+@media(max-width:600px){.home-menu{width:min(280px,calc(100% - 48px));margin:clamp(40px,13vh,110px) auto 40px}.home-entries{gap:10px}.home-secondary{gap:8px;margin-top:12px}.home-secondary .settings-entry,.home-secondary .company-select-link{padding:6px 10px}}
+
+@media screen{html body .home-menu .home-entry{min-height:86px;font-size:21px}@media(max-width:600px){html body .home-menu .home-entry{min-height:72px;font-size:18px}}}
