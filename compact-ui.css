@@ -66,3 +66,56 @@
  html body :is(#status,#other-status,.status):empty{min-height:0;margin-top:0;margin-bottom:0}
  @media(max-width:750px){html body>header,html body .app-header{padding-top:14px;padding-bottom:12px}html body .cash-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
 }
+
+/* 上部を段積みから業務バーへ。帳票の印刷レイアウトには適用しない。 */
+@media screen{
+ .workspace-old-brand,.workspace-repeated-storage{display:none!important}
+ html body.workspace-compact .cloud-save-banner{display:flex;align-items:center;flex-wrap:wrap;gap:6px 20px;padding:6px 18px!important;line-height:1.4;border-bottom:1px solid #cfdfeb;font-size:12px!important}
+ .workspace-app-name{font-size:13px;white-space:nowrap}
+ html body.workspace-compact main:not(.home-menu):not(.small-window){padding-top:12px}
+ html body.workspace-compact .workspace-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+ html body.workspace-compact .workspace-heading h1{margin:0;font-size:22px}
+ html body.workspace-compact header.workspace-navigation{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin:0 0 0 auto;padding:0;max-width:none;font-weight:400;font-size:14px}
+ html body.workspace-compact header.workspace-navigation .workspace-title{margin:0 auto 0 0!important;font-size:22px!important;font-weight:650!important;color:#253443!important}
+ html body.workspace-compact .workspace-heading .sample,html body.workspace-compact .workspace-heading .sample-badge{display:none}
+ html body.workspace-compact .workspace-heading header{flex:0 1 auto}
+ html body.workspace-compact .shell>.workspace-navigation{margin-bottom:10px;justify-content:space-between}
+ html body.workspace-compact .home-menu{margin-top:clamp(40px,14vh,120px)}
+ html body .ledger-command-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;margin-bottom:8px}
+ html body .ledger-command-bar .outstanding{flex:0 1 340px;min-width:250px;padding:6px 12px;min-height:38px;gap:20px;border-radius:3px}
+ html body .ledger-command-bar .outstanding strong{font-size:21px;line-height:1.2}
+ html body .ledger-command-bar .outstanding>span{font-size:13px}
+ html body .ledger-command-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+ html body .ledger-command-actions .other-actions{margin:0}
+ html body .cash-summary>div{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 12px}
+ html body .cash-summary strong{margin:0;font-size:20px}
+ html body .cash-summary span{font-size:12px}
+ html body.workspace-compact .page-heading>h1{margin:0}
+ html body.workspace-compact .intro,html body.workspace-compact .summary-note{margin-top:4px;margin-bottom:8px}
+ html body.workspace-compact .filters{margin-top:6px;margin-bottom:8px}
+ @media(max-width:750px){
+  html body.workspace-compact .cloud-save-banner{gap:2px 12px;padding:5px 12px!important}
+  .workspace-app-name{font-size:12px}
+  html body.workspace-compact .workspace-heading h1{font-size:20px}
+  html body.workspace-compact .workspace-heading{gap:6px}
+  html body.workspace-compact header.workspace-navigation{gap:8px;font-size:12px}
+  html body.workspace-compact .page-navigation{gap:10px}
+  html body.workspace-compact .page-navigation a{font-size:12px}
+  html body .ledger-command-bar .outstanding{flex:1 1 100%;min-width:0;padding:5px 10px}
+  html body .ledger-command-bar .outstanding small{display:inline;margin-left:8px}
+  html body .ledger-command-actions{gap:6px}
+  html body .ledger-command-actions button{font-size:12px;padding-left:8px;padding-right:8px}
+  html body .ledger-command-actions .other-actions{gap:6px}
+ }
+}
+
+@media screen{
+ html body.workspace-compact .cash-summary{grid-template-columns:repeat(4,minmax(0,1fr))}
+ html body.workspace-compact .workspace-heading.toolbar{justify-content:flex-start}
+ html body.workspace-compact .workspace-heading.toolbar header{margin-left:auto}
+ html body.workspace-compact header.workspace-navigation:has(h1){justify-content:space-between}
+ html body.workspace-compact .workspace-home-header{padding:8px 24px;font-weight:400}
+ html body.workspace-compact .workspace-home-header .screen-name{border:0;padding:0}
+ html body.workspace-compact .home-return{margin:0}
+ @media(max-width:750px){html body.workspace-compact .cash-summary{grid-template-columns:repeat(2,minmax(0,1fr))}html body.workspace-compact .workspace-heading.toolbar{gap:6px}html body.workspace-compact .workspace-heading.toolbar header{flex-wrap:wrap}}
+}
