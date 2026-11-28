@@ -6,7 +6,7 @@ headers.push('業種','建設業の許可','石綿作業主任者');
 const widths=[150,210,130,150,150,210,110,270,150,140,110,130,210,100,130,180];
 widths.push(180,230,150);
 const blank=()=>headers.map(()=>'');
-const store=window.vendorStore.create(window.appStorage,window.appSessionStorage);let rows=[];try{rows=store.read();}catch(e){$('status').textContent=e.message;$('save').disabled=$('save-bottom').disabled=true;throw e;}if(!rows.length)rows=Array.from({length:12},blank);
+const store=window.vendorStore.create(window.appStorage,window.appSessionStorage);let rows=[];try{rows=store.read();}catch(e){$('status').textContent=e.message;$('save').disabled=true;throw e;}if(!rows.length)rows=Array.from({length:12},blank);
 let oldQualifications={};try{oldQualifications=JSON.parse(window.appSessionStorage.getItem('vendor_ui_qualifications')||'{}');}catch(e){}
 rows=rows.map((r,i)=>window.vendorSchema.normalize(r,oldQualifications[i]||[]));
 let baseline=JSON.stringify(rows);window.addEventListener('beforeunload',e=>{if(JSON.stringify(rows)!==baseline){e.preventDefault();e.returnValue='';}});
@@ -41,7 +41,7 @@ $('rows').addEventListener('keydown',e=>{if(e.isComposing)return;const i=e.targe
 function undo(){if(!history.length)return;rows=history.pop();anchor=end=[Math.min(anchor[0],rows.length-1),anchor[1]];render();$('undo').disabled=!history.length;$('status').textContent='直前の編集を元に戻しました。';}
 $('undo').onclick=undo;$('add').onclick=()=>{remember();rows.push(...Array.from({length:10},blank));render();};$('insert').onclick=()=>{remember();const at=bounds()[0];rows.splice(at,0,blank());render();};$('delete').onclick=()=>{const [a,b]=bounds();remember();rows.splice(a,b-a+1);if(!rows.length)rows.push(blank());anchor=end=[Math.min(a,rows.length-1),0];render();};
 $('save').onclick=async()=>{let invalid=[];rows.forEach((r,i)=>{if(r.some(Boolean)&&(!r[0].trim()||(r[10]&&!['普通','当座'].includes(r[10]))||(r[18]!==''&&r[18]!=='〇')))invalid.push(i);});$('rows').querySelectorAll('tr').forEach((tr,i)=>tr.querySelectorAll('td').forEach(td=>td.classList.toggle('invalid',invalid.includes(i))));$('status').textContent=invalid.length?`${invalid.map(i=>i+1).join('、')}行目の表示名・口座種別・石綿作業主任者（〇／空欄）を確認してください。`:'入力内容を確認しました。';if(!invalid.length){try{if(window.cloudRuntime)await window.cloudRuntime.checkAccess();store.save(rows);if(window.cloudRuntime)await window.cloudRuntime.flush();baseline=JSON.stringify(rows);$('status').textContent='保存しました。業者一覧・見積の取引先候補に反映しました。';}catch(e){$('status').textContent=e.message+' 入力内容はこの画面に残っています。';}}};
-$('save-bottom').onclick=()=>$('save').click();
+
 document.querySelector('.view-link').addEventListener('click',event=>{if(JSON.stringify(rows)!==baseline){event.preventDefault();$('status').textContent='変更が未保存です。「保存」してから業者一覧を開いてください。';}});
 window.attachGridMenu({root:$('rows'),select:i=>{const p=[+i.dataset.r,+i.dataset.c],[a,b,c,d]=bounds();if(p[0]<a||p[0]>b||p[1]<c||p[1]>d)anchor=end=p;paint();},stamp:()=>JSON.stringify([rows,anchor,end]),copy:()=>{const[a,b,c,d]=bounds();return window.estimateGrid.encode(rows.slice(a,b+1).map(r=>r.slice(c,d+1)));},paste:pasteRange,clear,undo,status:message=>$('status').textContent=message});
 const list=document.createElement('datalist');list.id='account-types';list.innerHTML='<option value="普通"><option value="当座">';document.body.append(list);render();
