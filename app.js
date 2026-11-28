@@ -165,7 +165,7 @@ el('pay-cards').innerHTML=list.map(p=>{const j=db.jobs.find(j=>j.id===p.job);ret
   display();
   showFinance('');
   const entryView = new URLSearchParams(location.search).get('view');
-  const screenName=entryView==='finance'?'収支トップ':'工事一覧';const screenLabel=document.getElementById('section-screen-name');if(screenLabel)screenLabel.textContent=screenName;document.title=screenName+'｜売上進捗管理システム';
+  const screenName=entryView==='finance'?'収支トップ':'工事一覧';const screenLabel=document.getElementById('section-screen-name');if(screenLabel)screenLabel.textContent=screenName;document.title=screenName+'｜Yui-Pad';
   if (entryView === 'finance') document.querySelector('[data-tab="finance"]').click();
   if (entryView === 'settings') {
     location.replace('settings.html');
