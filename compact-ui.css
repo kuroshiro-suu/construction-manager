@@ -119,3 +119,21 @@
  html body.workspace-compact .home-return{margin:0}
  @media(max-width:750px){html body.workspace-compact .cash-summary{grid-template-columns:repeat(2,minmax(0,1fr))}html body.workspace-compact .workspace-heading.toolbar{gap:6px}html body.workspace-compact .workspace-heading.toolbar header{flex-wrap:wrap}}
 }
+
+@media screen{
+ html body .expense-command-toolbar{gap:10px 20px;margin-bottom:12px}
+ html body .expense-command-tools,html body .expense-primary-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+ html body .expense-command-tools{gap:20px}
+ html body .expense-primary-actions .command-export,html body .ledger-command-actions .command-export{margin-left:12px}
+ html body .ledger-command-actions .aux-help{margin-left:12px}
+ html body button.aux-help{min-height:27px;padding:3px 8px;font-size:12px;background:transparent;color:#526575;border-color:#c5d0d9;line-height:1.4}
+ main:has(#entry-view:not([hidden])) .expense-command-toolbar .expense-primary-actions,main:has(#entry-view:not([hidden])) .expense-command-toolbar>.total-label{display:none}
+ @media(max-width:750px){
+  html body .expense-command-tools{gap:12px}
+  html body .expense-primary-actions .command-export,html body .ledger-command-actions .command-export{margin-left:6px}
+  html body .ledger-command-actions .aux-help{margin-left:6px}
+  html body button.aux-help{min-height:30px;font-size:12px}
+ }
+}
+
+@media screen{html body button.aux-help:is(#category-help,#other-help){min-height:27px;padding:3px 8px;font-size:12px;line-height:1.4}@media(max-width:750px){html body button.aux-help:is(#category-help,#other-help){min-height:30px}}}
