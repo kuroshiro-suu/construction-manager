@@ -12,3 +12,25 @@ header { max-width:1120px; margin:auto; padding:28px 28px 24px; display:flex; al
 
 
 .payment-plan .fields{grid-template-columns:repeat(2,minmax(0,1fr))}.payment-note,.payment-plan label:has([data-key="vendor"]){grid-column:1/-1}.payment-receipt{background:#f6f8fa;border-left:1px solid #c8d3dc;padding:14px 16px;align-self:stretch}.payment-receipt-title{font-size:14px;font-weight:600;color:#253443}.payment-receipt label{color:#253443}@media(max-width:750px){.payment-plan .fields{grid-template-columns:1fr}.payment-receipt{border-left:0;border-top:1px solid #c8d3dc;padding:14px 12px}}
+
+/* PCはセル罫線で密に、スマホは入力の読みやすさを保ってスリムにする。 */
+.card-list{gap:10px}article{padding:10px 12px;border-radius:4px}.card-heading{margin-bottom:8px;gap:8px}.card-heading h3{font-size:14px}.card-remaining{margin:8px 0 0;padding-top:6px}.card-footer{margin-top:8px;gap:8px}.card-footer button,.add-button{min-height:32px;padding:4px 10px;font-size:13px}.section-heading{margin-bottom:10px;padding-bottom:6px}.section-heading h2{font-size:18px}.payment-section{margin-top:24px}.final-payment{margin-top:7px;font-size:12px}.final-payment small{font-size:11px}.payment-receipt-title{font-size:12px}
+@media(min-width:751px){
+ .income-fields{grid-template-columns:minmax(0,3fr) minmax(190px,1fr);gap:10px}
+ .claim-fields .fields{grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+ .claim-fields .fields>label:first-child{grid-column:span 2}.claim-fields .fields>label:last-child{grid-column:1/-1}
+ .claim-fields .fields,.payment-plan .fields{border-top:1px solid #c3cfd9;border-left:1px solid #c3cfd9}
+ .claim-fields .fields>label,.payment-plan .fields>label,.payment-plan .budget,.payment-note>label{border:0;border-right:1px solid #c3cfd9;border-bottom:1px solid #c3cfd9;background:#f2f5f8;gap:2px;padding:3px 5px 0;font-size:11px;font-weight:500}
+ .payment-plan .fields{gap:0}.payment-note{padding:0}
+ .claim-fields input,.claim-fields select,.payment-plan input{min-height:30px;height:30px;border:0;border-top:1px solid #dbe3ea;border-radius:0;padding:3px 5px;font-size:14px;background:white}
+ .field-note{font-size:10px;margin-left:5px}
+ .budget output{min-height:30px;border:0;border-top:1px solid #dbe3ea;border-radius:0;padding:3px 5px;font-size:14px}
+ .receipt-fields{border:1px solid #c3cfd9;background:#edf2f6;padding:7px;gap:7px;justify-content:center}
+ .receipt-fields label{font-size:11px;gap:2px}.receipt-fields input{min-height:30px;height:30px;padding:3px 5px;font-size:14px;border-radius:2px}
+ .payment-receipt{padding:7px}
+}
+@media(max-width:750px){
+ header{padding:16px 12px}main{padding:0 12px 24px}article{padding:10px}.card-heading h3{font-size:14px}.income-fields{gap:10px}.claim-fields .fields,.payment-plan .fields{gap:8px}
+ label{font-size:12px;gap:3px}input,select{min-height:36px;padding:4px 7px;font-size:16px;border-radius:3px}.budget output{min-height:36px;font-size:16px;padding:4px 7px}.field-note{font-size:10px;margin-left:4px}
+ .receipt-fields{padding:9px 8px;background:#f3f6f8;gap:8px}.payment-receipt{padding:9px 8px}.final-payment{gap:5px}.split-button{min-height:28px;padding:2px 7px}
+}
